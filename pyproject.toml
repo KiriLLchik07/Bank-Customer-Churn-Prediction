@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "bank-customer-churn-prediction"
+version = "0.1.0"
+description = "A machine learning project to predict bank customer churn."
+authors = ["KiriLLchik07 <kirill3456777@mail.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+torch = "^2.0.0"
+pandas = "^2.0.0"
+numpy = "^1.24.0"
+seaborn = "^0.13.0"
+jupyter = "^1.0.0"
+matplotlib = "^3.7.0"
+scikit-learn = "^1.7.2"
+optuna = "^4.5.0"
+catboost = "^1.2.8"
+lightgbm = "^4.6.0"
+xgboost = "^3.0.5"
+imbalanced-learn = "^0.14.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
