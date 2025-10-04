@@ -3,24 +3,24 @@ import pandas as pd
 
 class ProprocessingData:
     def __init__(self, df):
-        self.df = df
+        self.df = df.copy()
     
     def handle_missing_values(self):
-        print("Пропуски до обработки:")
+        print("Пропуски до обработки:\n")
         print(self.df.isna().sum())
                 
         categorical_col = 'Geography'
         mode_val = self.df[categorical_col].mode()[0]
         self.df[categorical_col] = self.df[categorical_col].fillna(mode_val)
-        print(f"Заполнены пропуски в {categorical_col} значением: {mode_val}")
+        print(f"\nЗаполнены пропуски в {categorical_col} значением: {mode_val}")
         
-        numerical_col = 'Age'
-        if numerical_col in self.df.columns and self.df[numerical_col].isnull().any():
-            median_val = self.df[numerical_col].median()
-            self.df[numerical_col] = self.df[numerical_col].fillna(median_val)
-            print(f"Заполнены пропуски в {numerical_col} значением: {median_val}")
+        numerical_col = ['Age', 'HasCrCard', 'IsActiveMember']
+        for col in numerical_col:
+            median_val = self.df[col].median()
+            self.df[col] = self.df[col].fillna(median_val)
+            print(f"Заполнены пропуски в {col} значением: {median_val}")
         
-        print("Пропуски после обработки:")
+        print("\nПропуски после обработки:")
         print(self.df.isnull().sum())
         
         return self.df
@@ -30,7 +30,7 @@ class ProprocessingData:
         
         self.df = self.df.drop(columns=columns_to_drop)
         
-        print(f"Удалены столбцы: {columns_to_drop}")
+        print(f"\nУдалены столбцы: {columns_to_drop}")
         print(f"Оставшееся количество признаков: {self.df.shape[1]}")
         
         return self.df
@@ -52,41 +52,44 @@ class ProprocessingData:
 
 
     def create_new_features(self):
-        
-        self.df['Age_Active_Interaction'] = self.df['Age'] * self.df['IsActiveMember']
+        print("\n🎯 Создание новых признаков...")
         
         self.df['Is_Senior_Active'] = ((self.df['Age'] > 40) & 
-                                            (self.df['IsActiveMember'] == 1)).astype(int)
-        
-        self.df['High_Risk_Group'] = ((self.df['NumOfProducts'] == 1) | 
-                                        (self.df['Geography'] == 'Germany')).astype(int)
+                                    (self.df['IsActiveMember'] == 1)).astype(int)
         
         self.df['Active_With_Multiple_Products'] = ((self.df['IsActiveMember'] == 1) & 
-                                            (self.df['NumOfProducts'] > 1)).astype(int)
+                                                (self.df['NumOfProducts'] > 1)).astype(int)
         
         self.df['Value_Client'] = ((self.df['Balance'] > self.df['Balance'].median()) &
-                                    (self.df['NumOfProducts'] >= 2)).astype(int)
+                                (self.df['NumOfProducts'] >= 2)).astype(int)
+                
+        self.df['New_HighRisk'] = ((self.df['Tenure'] < 2) & 
+                                (self.df['NumOfProducts'] == 1)).astype(int)
+        
+        self.df['German_Female_Risk'] = ((self.df['Geography'] == 'Germany') & 
+                                        (self.df['Gender'] == 'Female')).astype(int)
         
         self.df['AgeGroup'] = pd.cut(self.df['Age'], 
-                                bins=[0, 30, 40, 50, 60, 100],
-                                labels=['18-30', '31-40', '41-50', '51-60', '60+'])
-
+                                    bins=[0, 30, 40, 50, 60, 100],
+                                    labels=['18-30', '31-40', '41-50', '51-60', '60+'])
+        
+        print("   Созданы: Is_Senior_Active, Active_With_Multiple_Products, Value_Client")
+        print("   New_HighRisk, German_Female_Risk, AgeGroup")
         return self.df
 
 
     def check_new_features_correlation(self):
-        
         numeric_cols = self.df.select_dtypes(include=[np.number]).columns.tolist()
         
         corr_matrix = self.df[numeric_cols].corr(method='spearman')
         
-        new_features = ['Age_Active_Interaction', 'Is_Senior_Active', 'High_Risk_Group', 
-                        'Active_With_Multiple_Products', 'Value_Client']
+        new_features = ['Is_Senior_Active', 'New_HighRisk', 
+                        'Active_With_Multiple_Products', 'Value_Client', 'German_Female_Risk']
         
-        print("🔍 Корреляции новых признаков:")
+        print("\n🔍 Корреляции новых признаков: (крит. значение считаем >= 0.6)")
         for new_feat in new_features:
             correlations = corr_matrix[new_feat].sort_values(ascending=False)
-            high_corr = correlations[abs(correlations) > 0.5]
+            high_corr = correlations[abs(correlations) >= 0.5]
             if len(high_corr) > 1:
                 print(f"{new_feat}: {high_corr.to_dict()}")
             else:
@@ -94,20 +97,18 @@ class ProprocessingData:
         
         return corr_matrix
 
-
     def encode_categorical_features(self):
-        
-        geography_dummies = pd.get_dummies(self.df['Geography'], prefix='Geo')
+        geography_dummies = pd.get_dummies(self.df['Geography'], prefix='Geo').astype('int32')
         self.df = pd.concat([self.df, geography_dummies], axis=1)
         
         self.df['Gender'] = self.df['Gender'].map({"Female": 0, "Male": 1})
         
-        age_dummies = pd.get_dummies(self.df['AgeGroup'], prefix='AgeGroup')
+        age_dummies = pd.get_dummies(self.df['AgeGroup'], prefix='AgeGroup').astype('int32')
         self.df = pd.concat([self.df, age_dummies], axis=1)
         
-        self.df = self.df.drop(['Geography', 'Gender', 'AgeGroup'], axis=1)
+        self.df = self.df.drop(['Geography', 'AgeGroup'], axis=1)
         
-        print("Закодированы категориальные признаки")
+        print("\nЗакодированы категориальные признаки!")
         
         return self.df
     
@@ -116,5 +117,7 @@ class ProprocessingData:
         self.remove_technical_columns()
         self.handle_outliers_robust()
         self.create_new_features()
+        self.check_new_features_correlation()
         self.encode_categorical_features()
+        print("\n✅ Предобработка завершена!")
         return self.df
