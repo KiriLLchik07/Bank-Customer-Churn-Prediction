@@ -74,11 +74,35 @@ class TrainModels:
                 "train_f1_score": f1_score(self.y_train, y_pred_train),
                 "train_precision": precision_score(self.y_train, y_pred_train),
                 "train_recall": recall_score(self.y_train, y_pred_train),
+
+                "roc_auc_diff": roc_auc_score(self.y_train, y_pred_proba_train) - roc_auc_score(self.y_test, y_pred_proba_test),
+                "f1_diff": f1_score(self.y_train, y_pred_train) - f1_score(self.y_test, y_pred_test),
                 
                 "classification_report": classification_report(self.y_test, y_pred_test)
             }
 
         return self.predictions
+    
+    def compare_models_performance(self):
+        """Сравнивает производительность всех моделей"""
+        comparison_data = []
+        
+        for model_name, metrics in self.predictions.items():
+            comparison_data.append({
+                'Model': model_name,
+                'Test ROC-AUC': metrics['test_roc_auc'],
+                'Test F1': metrics['test_f1_score'],
+                'Train ROC-AUC': metrics['train_roc_auc'],
+                'Train F1': metrics['train_f1_score'],
+                'ROC-AUC Diff': metrics['roc_auc_diff'],
+                'F1 Diff': metrics['f1_diff']
+            })
+        
+        import pandas as pd
+        comparison_df = pd.DataFrame(comparison_data)
+        comparison_df = comparison_df.sort_values('Test ROC-AUC', ascending=False)
+        
+        return comparison_df
     
     def get_best_model(self, metric='test_roc_auc'):
         best_model_name = None
