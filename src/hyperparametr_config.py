@@ -3,8 +3,8 @@ MODEL_PARAMS_CONFIG = {
         'class': 'CatBoostClassifier',
         'fixed_params': {'random_state': 42, 'verbose': False},
         'grid_params': {
-            'iterations': {'type': 'int', 'low': 500, 'high': 2000},
-            'depth': {'type': 'int', 'low': 4, 'high': 10},
+            'iterations': {'type': 'int', 'low': 500, 'high': 1250},
+            'depth': {'type': 'int', 'low': 4, 'high': 8},
             'learning_rate': {'type': 'float', 'low': 0.01, 'high': 0.3, 'log': True},
             'l2_leaf_reg': {'type': 'float', 'low': 1, 'high': 10},
             'border_count': {'type': 'int', 'low': 32, 'high': 255},
@@ -16,8 +16,8 @@ MODEL_PARAMS_CONFIG = {
         'class': 'LGBMClassifier', 
         'fixed_params': {'random_state': 42, 'verbose': -1},
         'grid_params': {
-            'n_estimators': {'type': 'int', 'low': 100, 'high': 2000},
-            'max_depth': {'type': 'int', 'low': 3, 'high': 12},
+            'n_estimators': {'type': 'int', 'low': 100, 'high': 1250},
+            'max_depth': {'type': 'int', 'low': 3, 'high': 8},
             'learning_rate': {'type': 'float', 'low': 0.01, 'high': 0.3, 'log': True},
             'num_leaves': {'type': 'int', 'low': 20, 'high': 100},
             'min_child_samples': {'type': 'int', 'low': 10, 'high': 100},
@@ -31,8 +31,8 @@ MODEL_PARAMS_CONFIG = {
         'class': 'XGBClassifier',
         'fixed_params': {'random_state': 42},
         'grid_params': {
-            'n_estimators': {'type': 'int', 'low': 100, 'high': 2000},
-            'max_depth': {'type': 'int', 'low': 3, 'high': 12},
+            'n_estimators': {'type': 'int', 'low': 100, 'high': 1250},
+            'max_depth': {'type': 'int', 'low': 3, 'high': 8},
             'learning_rate': {'type': 'float', 'low': 0.01, 'high': 0.3, 'log': True},
             'subsample': {'type': 'float', 'low': 0.6, 'high': 1.0},
             'colsample_bytree': {'type': 'float', 'low': 0.6, 'high': 1.0},

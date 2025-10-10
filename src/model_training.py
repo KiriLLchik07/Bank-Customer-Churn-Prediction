@@ -48,19 +48,48 @@ class TrainModels:
 
         return self.models
     
+    def add_tuned_models(self, tuned_models_dict):
+        for name, model in tuned_models_dict.items():
+            model.fit(self.X_train, self.y_train)
+            self.models[name] = model
+        print(f"✅ Добавлено {len(tuned_models_dict)} настроенных моделей")
+        return self.models
+    
     def evaluate_models(self):
         for name_model, model in self.models.items():
-            y_pred = model.predict(self.X_test)
-            y_pred_proba = model.predict_proba(self.X_test)[:, 1]
+            y_pred_test = model.predict(self.X_test)
+            y_pred_proba_test = model.predict_proba(self.X_test)[:, 1]
+
+            y_pred_train = model.predict(self.X_train)
+            y_pred_proba_train = model.predict_proba(self.X_train)[:, 1]
             self.predictions[name_model] = {
-                "roc_auc_score": roc_auc_score(self.y_test, y_pred_proba),
-                "f1_score": f1_score(self.y_test, y_pred),
-                "precision": precision_score(self.y_test, y_pred),
-                "recall": recall_score(self.y_test, y_pred),
-                "classification_report": classification_report(self.y_test, y_pred)
+                # Метрики на тестовых данных
+                "test_roc_auc": roc_auc_score(self.y_test, y_pred_proba_test),
+                "test_f1_score": f1_score(self.y_test, y_pred_test),
+                "test_precision": precision_score(self.y_test, y_pred_test),
+                "test_recall": recall_score(self.y_test, y_pred_test),
+                
+                # Метрики на тренировочных данных
+                "train_roc_auc": roc_auc_score(self.y_train, y_pred_proba_train),
+                "train_f1_score": f1_score(self.y_train, y_pred_train),
+                "train_precision": precision_score(self.y_train, y_pred_train),
+                "train_recall": recall_score(self.y_train, y_pred_train),
+                
+                "classification_report": classification_report(self.y_test, y_pred_test)
             }
 
         return self.predictions
+    
+    def get_best_model(self, metric='test_roc_auc'):
+        best_model_name = None
+        best_score = -1
+        
+        for model_name, metrics in self.predictions.items():
+            if metrics[metric] > best_score:
+                best_score = metrics[metric]
+                best_model_name = model_name
+        
+        return best_model_name, best_score
     
     def plot_roc_curve(self):
 

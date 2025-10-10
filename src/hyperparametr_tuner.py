@@ -24,7 +24,7 @@ class HyperparametrTuner:
             'XGBClassifier': XGBClassifier
         }
 
-    def gererate_objective(self, model_config):
+    def gererate_objective(self, model_name, model_config):
         model_class = self.model_classes[model_config['class']]
         grid_params = model_config['grid_params']
         fixed_params = model_config['fixed_params']
