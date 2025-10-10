@@ -1,6 +1,6 @@
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import RobustScaler
-from imblearn.over_sampling import SMOTE
+from imblearn.under_sampling import RandomUnderSampler
 import joblib
 import os
 
@@ -42,10 +42,10 @@ class PrepareData:
 
         return self.X_train, self.X_test
     
-    def balancing_classes(self):
-        smote = SMOTE(random_state=42)
+    def balancing_classes(self, random_state=42):
+        balancing_method = RandomUnderSampler(random_state=random_state)
 
-        self.X_train_balanced, self.y_train_balanced = smote.fit_resample(self.X_train, self.y_train)
+        self.X_train_balanced, self.y_train_balanced = balancing_method.fit_resample(self.X_train, self.y_train)
 
         return self.X_train_balanced, self.y_train_balanced
     
