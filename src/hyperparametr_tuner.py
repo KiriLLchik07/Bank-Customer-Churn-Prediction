@@ -1,8 +1,12 @@
+from datetime import datetime
+import os
 from catboost import CatBoostClassifier
+import joblib
 from lightgbm import LGBMClassifier
 from sklearn.model_selection import cross_val_score
 from xgboost import XGBClassifier
 import optuna
+from model_manager import ModelManager
 
 class HyperparametrTuner:
     def __init__(self, X_train, y_train, params_config, 
@@ -17,6 +21,7 @@ class HyperparametrTuner:
         self.direction = direction
         self.best_params = {}
         self.results = {}
+        self.model_manager = ModelManager()
 
         self.model_classes = {
             'CatBoostClassifier': CatBoostClassifier,
@@ -108,3 +113,26 @@ class HyperparametrTuner:
         else:
             print(f"Study для {model_name} не найден")
             return None
+        
+    def save_tuning_results(self, study_name="hyperparameter_tuning"):
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"{study_name}_{timestamp}.pkl"
+        filepath = os.path.join(self.model_manager.models_dir, filename)
+        
+        results = {
+            'best_params': self.best_params,
+            'study_results': self.results,
+            'config_used': self.params_config,
+            'timestamp': timestamp
+        }
+        
+        joblib.dump(results, filepath)
+        print(f"✅ Результаты тюнинга сохранены: {filepath}")
+        return filepath
+    
+    def load_tuning_results(self, filepath):
+        results = joblib.load(filepath)
+        self.best_params = results['best_params']
+        self.results = results['study_results']
+        print(f"✅ Результаты тюнинга загружены из: {filepath}")
+        return results

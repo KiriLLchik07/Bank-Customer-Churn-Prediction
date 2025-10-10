@@ -7,6 +7,10 @@ from lightgbm import LGBMClassifier
 from xgboost import XGBClassifier
 from sklearn.ensemble import RandomForestClassifier
 import matplotlib.pyplot as plt
+import numpy as np
+from model_manager import ModelManager
+from datetime import datetime
+import os
 
 class TrainModels:
     def __init__(self, X_train, X_test, y_train, y_test):
@@ -16,6 +20,7 @@ class TrainModels:
         self.y_test = y_test
         self.models = {}
         self.predictions = {}
+        self.model_manager = ModelManager()
     
     def fit_models(self,):
         """ Обучает модели """
@@ -137,8 +142,6 @@ class TrainModels:
 
     def optimize_classification_threshold(self, model_name, metric='f1'):
         """Находит оптимальный порог классификации для выбранной метрики"""
-        from sklearn.metrics import f1_score, precision_score, recall_score
-        import numpy as np
         
         model = self.models[model_name]
         y_pred_proba = model.predict_proba(self.X_test)[:, 1]
@@ -184,3 +187,28 @@ class TrainModels:
             print(f"   {metric}: {value:.4f}")
         
         return optimal_metrics
+    
+    def save_model(self, model_name, metrics=None):
+        model = self.models[model_name]
+        metadata = {
+            'model_name': model,
+            'training_date': datetime.now().strftime("%Y%m%d_%H%M%S"),
+            'performance_metrics': self.predictions.get(model_name, {}),
+        }
+
+        if metrics:
+            metadata.update(metrics)
+
+        return self.model_manager.save_model(model, model_name, metadata)
+    
+    def load_model_in_trainer(self, model_name_or_path, new_name=None):
+        model = self.model_manager.load_model(model_name_or_path)
+
+        if new_name:
+            model_name = new_name
+        else:
+            model_name = os.path.basename(model_name_or_path).split('_')[0]
+
+        self.models[model_name] = model
+        print(f"✅ Модель {model_name} загружена в trainer")
+        return model
