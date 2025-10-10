@@ -1,7 +1,7 @@
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import roc_auc_score, f1_score, classification_report, precision_score, recall_score, roc_curve, auc
+from sklearn.metrics import roc_auc_score, f1_score, classification_report, precision_score, recall_score, roc_curve, auc, ConfusionMatrixDisplay, confusion_matrix
 from catboost import CatBoostClassifier
 from lightgbm import LGBMClassifier
 from xgboost import XGBClassifier
@@ -212,3 +212,65 @@ class TrainModels:
         self.models[model_name] = model
         print(f"✅ Модель {model_name} загружена в trainer")
         return model
+
+    def create_final_report(self, model_name, threshold=0.5):
+        """Создаёт финальный отчёт по модели"""
+        model = self.models[model_name]
+        
+        y_pred_proba = model.predict_proba(self.X_test)[:, 1]
+        y_pred = (y_pred_proba >= threshold).astype(int)
+
+        report = {
+            'roc_auc': roc_auc_score(self.y_test, y_pred_proba),
+            'f1': f1_score(self.y_test, y_pred),
+            'precision': precision_score(self.y_test, y_pred),
+            'recall': recall_score(self.y_test, y_pred),
+            'classification_report': classification_report(self.y_test, y_pred),
+            'confusion_matrix': confusion_matrix(self.y_test, y_pred),
+            'threshold': threshold
+        }
+        
+        return report
+
+    def plot_confusion_matrix_final(self, model_name, threshold=0.5):        
+        model = self.models[model_name]
+        y_pred_proba = model.predict_proba(self.X_test)[:, 1]
+        y_pred = (y_pred_proba >= threshold).astype(int)
+        
+        fig, ax = plt.subplots(figsize=(8, 6))
+        ConfusionMatrixDisplay.from_predictions(self.y_test, y_pred, ax=ax, cmap='Blues')
+        plt.title(f'Confusion Matrix ({model_name})\nThreshold = {threshold}')
+        plt.show()
+        
+        tn, fp, fn, tp = confusion_matrix(self.y_test, y_pred).ravel()
+        print("📊 Бизнес-интерпретация:")
+        print(f"   Правильно предсказали лояльных: {tn} клиентов")
+        print(f"   Ложные срабатывания (напрасно беспокоили): {fp} клиентов") 
+        print(f"   Пропущенные уходящие: {fn} клиентов")
+        print(f"   Правильно найденные уходящие: {tp} клиентов")
+
+    def plot_feature_importance(self, model_name, top_n=15):
+        """Визуализация важности признаков"""
+        model = self.models[model_name]
+        
+        if hasattr(model, 'feature_importances_'):
+            importances = model.feature_importances_
+            feature_names = self.X_train.columns if hasattr(self.X_train, 'columns') else [f'Feature_{i}' for i in range(len(importances))]
+            
+            indices = np.argsort(importances)[::-1]
+            
+            plt.figure(figsize=(10, 8))
+            plt.title(f'Feature Importance - {model_name}')
+            plt.barh(range(min(top_n, len(indices))), 
+                    importances[indices][:top_n][::-1])
+            plt.yticks(range(min(top_n, len(indices))), 
+                    [feature_names[i] for i in indices[:top_n]][::-1])
+            plt.xlabel('Importance')
+            plt.tight_layout()
+            plt.show()
+            
+            print("🎯 Топ-10 самых важных признаков:")
+            for i in range(min(10, len(indices))):
+                print(f"   {i+1}. {feature_names[indices[i]]}: {importances[indices[i]]:.4f}")
+        else:
+            print(f"❌ Модель {model_name} не поддерживает feature importance")
