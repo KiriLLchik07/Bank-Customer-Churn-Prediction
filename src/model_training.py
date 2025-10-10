@@ -18,6 +18,7 @@ class TrainModels:
         self.predictions = {}
     
     def fit_models(self,):
+        """ Обучает модели """
         logistic_regression = LogisticRegression(random_state=42, max_iter=1000)
         logistic_regression.fit(self.X_train, self.y_train)
         self.models['LogisticRegression'] = logistic_regression
@@ -49,6 +50,7 @@ class TrainModels:
         return self.models
     
     def add_tuned_models(self, tuned_models_dict):
+        """ Добавляет к общему списку моделей наши продвинутые модели """
         for name, model in tuned_models_dict.items():
             model.fit(self.X_train, self.y_train)
             self.models[name] = model
@@ -56,6 +58,7 @@ class TrainModels:
         return self.models
     
     def evaluate_models(self):
+        """ Считает предсказания и метрики """
         for name_model, model in self.models.items():
             y_pred_test = model.predict(self.X_test)
             y_pred_proba_test = model.predict_proba(self.X_test)[:, 1]
@@ -63,13 +66,11 @@ class TrainModels:
             y_pred_train = model.predict(self.X_train)
             y_pred_proba_train = model.predict_proba(self.X_train)[:, 1]
             self.predictions[name_model] = {
-                # Метрики на тестовых данных
                 "test_roc_auc": roc_auc_score(self.y_test, y_pred_proba_test),
                 "test_f1_score": f1_score(self.y_test, y_pred_test),
                 "test_precision": precision_score(self.y_test, y_pred_test),
                 "test_recall": recall_score(self.y_test, y_pred_test),
                 
-                # Метрики на тренировочных данных
                 "train_roc_auc": roc_auc_score(self.y_train, y_pred_proba_train),
                 "train_f1_score": f1_score(self.y_train, y_pred_train),
                 "train_precision": precision_score(self.y_train, y_pred_train),
@@ -116,7 +117,7 @@ class TrainModels:
         return best_model_name, best_score
     
     def plot_roc_curve(self):
-
+        """ Отображает графики roc-auc кривых """
         for name_model, model in self.models.items():
             y_pred_proba = model.predict_proba(self.X_test)[:,1]
         
@@ -133,3 +134,53 @@ class TrainModels:
             plt.legend()
             plt.grid(True)
             plt.show()
+
+    def optimize_classification_threshold(self, model_name, metric='f1'):
+        """Находит оптимальный порог классификации для выбранной метрики"""
+        from sklearn.metrics import f1_score, precision_score, recall_score
+        import numpy as np
+        
+        model = self.models[model_name]
+        y_pred_proba = model.predict_proba(self.X_test)[:, 1]
+        
+        thresholds = np.arange(0.1, 0.9, 0.01)
+        best_threshold = 0.5
+        best_score = 0
+        
+        for threshold in thresholds:
+            y_pred = (y_pred_proba >= threshold).astype(int)
+            
+            if metric == 'f1':
+                score = f1_score(self.y_test, y_pred)
+            elif metric == 'precision':
+                score = precision_score(self.y_test, y_pred)
+            elif metric == 'recall':
+                score = recall_score(self.y_test, y_pred)
+            
+            if score > best_score:
+                best_score = score
+                best_threshold = threshold
+        
+        print(f"🎯 Оптимальный порог для {model_name}: {best_threshold:.3f}")
+        print(f"   {metric.capitalize()} с оптимальным порогом: {best_score:.4f}")
+        
+        return best_threshold, best_score
+    
+    def evaluate_with_optimal_threshold(self, model_name, threshold):
+        """Переоценка модели с оптимальным порогом"""
+        model = self.models[model_name]
+        y_pred_proba = model.predict_proba(self.X_test)[:, 1]
+        y_pred_optimal = (y_pred_proba >= threshold).astype(int)
+        
+        optimal_metrics = {
+            'f1_score': f1_score(self.y_test, y_pred_optimal),
+            'precision': precision_score(self.y_test, y_pred_optimal),
+            'recall': recall_score(self.y_test, y_pred_optimal),
+            'roc_auc': roc_auc_score(self.y_test, y_pred_proba)
+        }
+        
+        print(f"📊 Метрики с порогом {threshold:.3f}:")
+        for metric, value in optimal_metrics.items():
+            print(f"   {metric}: {value:.4f}")
+        
+        return optimal_metrics
