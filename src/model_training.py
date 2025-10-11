@@ -8,6 +8,7 @@ from xgboost import XGBClassifier
 from sklearn.ensemble import RandomForestClassifier
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 from model_manager import ModelManager
 from datetime import datetime
 import os
@@ -104,7 +105,6 @@ class TrainModels:
                 'F1 Diff': metrics['f1_diff']
             })
         
-        import pandas as pd
         comparison_df = pd.DataFrame(comparison_data)
         comparison_df = comparison_df.sort_values('Test ROC-AUC', ascending=False)
         
