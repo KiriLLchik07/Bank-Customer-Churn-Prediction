@@ -33,14 +33,24 @@ class CustomerChurnPredictor:
 
     def _check_condition(self, value, condition_value) -> bool:
         """Проверка условия с поддержкой операторов"""
-        if isinstance(condition_value, str) and any(op in condition_value for op in ['>', '<', '>=', '<=']):
+        if value is None:
+            return False
+            
+        if isinstance(condition_value, str):
             for op_symbol, op_func in self.operators.items():
                 if condition_value.startswith(op_symbol):
-                    compare_value = float(condition_value[len(op_symbol):])
-                    return op_func(value, compare_value)
+                    try:
+                        compare_value = float(condition_value[len(op_symbol):])
+                        return op_func(value, compare_value)
+                    except ValueError:
+                        # Если не получается конвертировать в число, пробуем как строку
+                        return op_func(str(value), condition_value[len(op_symbol):])
+            
+            # Если нет оператора, просто сравниваем как строки
+            return str(value) == condition_value
         else:
             return value == condition_value
-        return False
+
     
     def analyze_risk_factors(self, customer_data: dict, probability: float) -> list:
         """
@@ -93,15 +103,15 @@ class CustomerChurnPredictor:
         
         probability = self.model.predict_proba(test_data)[0, 0]
         
-        if probability > 0.7:
+        if probability > 0.6:
             risk_level = "🚨 КРИТИЧЕСКИЙ РИСК"
             action = "НЕМЕДЛЕННОЕ ВМЕШАТЕЛЬСТВО"
             color = "red"
-        elif probability > 0.5:
+        elif probability > 0.4:
             risk_level = "🟡 ВЫСОКИЙ РИСК"
-            action = "ПРИОРИТЕТНОЕ УДЕРЖАНИЕ"
+            action = "ПРИОРИТЕТНОЕ УДЕРЖАНИЕ" 
             color = "orange"
-        elif probability > 0.3:
+        elif probability > 0.2:
             risk_level = "🟠 СРЕДНИЙ РИСК"
             action = "АКТИВНЫЙ МОНИТОРИНГ"
             color = "yellow"
