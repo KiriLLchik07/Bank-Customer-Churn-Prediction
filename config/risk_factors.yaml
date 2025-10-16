@@ -1,0 +1,33 @@
+risk_factors:
+  NumOfProducts:
+    conditions:
+      - value: 1
+        message: "❌ Только 1 продукт банка - ВЫСОКИЙ РИСК"
+        type: "high_risk"
+      - value: ">=3"
+        message: "✅ 3+ продукта банка - низкий риск"
+        type: "low_risk"
+
+  IsActiveMember:
+    conditions:
+      - value: 0
+        message: "❌ Неактивный клиент - ВЫСОКИЙ РИСК"
+        type: "high_risk"
+      - value: 1
+        message: "✅ Активный клиент - низкий риск"
+        type: "low_risk"
+
+  Age:
+    conditions:
+      - value: ">45"
+        message: "⚠️ Возраст 45+ - повышенный риск"
+        type: "medium_risk"
+      - value: "<35"
+        message: "✅ Молодой возраст - низкий риск"
+        type: "low_risk"
+
+  Balance:
+    conditions:
+      - value: ">150000"
+        message: "⚠️ Очень высокий баланс - риск потери крупного клиента"
+        type: "medium_risk"
