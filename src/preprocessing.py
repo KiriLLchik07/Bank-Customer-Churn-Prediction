@@ -3,9 +3,19 @@ import pandas as pd
 
 class ProprocessingData:
     def __init__(self, df):
+        """
+        Класс предназначен для обработки пропусков, удаления технических столбцов,
+        генерации новых фичей и обработки категориальных признаков.
+
+        Arguments:
+            df: датасет, который мы будем обрабатывать 
+        """
         self.df = df.copy()
     
     def handle_missing_values(self):
+        """
+        Метод для обработки пропусков в датасете (с помощью медианы и моды)
+        """
         print("Пропуски до обработки:\n")
         print(self.df.isna().sum())
                 
@@ -26,6 +36,9 @@ class ProprocessingData:
         return self.df
 
     def remove_technical_columns(self):
+        """
+        Метод для удаления технических столбцов
+        """
         columns_to_drop = ['RowNumber', 'CustomerId', 'Surname']
         
         self.df = self.df.drop(columns=columns_to_drop)
@@ -36,6 +49,9 @@ class ProprocessingData:
         return self.df
 
     def handle_outliers_robust(self):
+        """
+        Метод для обработки выбросов
+        """
         df_clean = self.df
         
         lower_bound = df_clean['Age'].quantile(0.01)
@@ -52,6 +68,9 @@ class ProprocessingData:
 
 
     def create_new_features(self):
+        """
+        Метод для создания новых фичей
+        """
         print("\n🎯 Создание новых признаков...")
         
         self.df['Is_Senior_Active'] = ((self.df['Age'] > 40) & 
@@ -79,6 +98,9 @@ class ProprocessingData:
 
 
     def check_new_features_correlation(self):
+        """
+        Метод для проверки корреляции новых признаков с другими признаками
+        """
         numeric_cols = self.df.select_dtypes(include=[np.number]).columns.tolist()
         
         corr_matrix = self.df[numeric_cols].corr(method='spearman')
@@ -98,6 +120,9 @@ class ProprocessingData:
         return corr_matrix
 
     def encode_categorical_features(self):
+        """
+        Метод для преобразования категориальных признаков в числовые
+        """
         geography_dummies = pd.get_dummies(self.df['Geography'], prefix='Geo').astype('int32')
         self.df = pd.concat([self.df, geography_dummies], axis=1)
         
@@ -113,6 +138,9 @@ class ProprocessingData:
         return self.df
     
     def preprocessing(self):
+        """
+        Препроцессинг. Последовательное применение методов, написанных выше
+        """
         self.handle_missing_values()
         self.remove_technical_columns()
         self.handle_outliers_robust()

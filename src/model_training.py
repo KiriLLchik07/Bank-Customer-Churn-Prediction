@@ -14,6 +14,24 @@ from datetime import datetime
 import os
 
 class TrainModels:
+    """
+    Класс, который позволяет обучить модели и сохраняют лучшую из них. Доступны следующие методы:
+
+    - **fit_models()**: обучает базовые и продвинутые модели без подобранных гиперпараметров;
+    - **add_tuned_models()**: добавляет к общему списку моделей наши продвинутые модели;
+    - **evaluate_models()**: метод, предназначенный для оценки модели, с помощью метрик ML;
+    - **compare_models_performance()**: cравнивает производительность всех моделей;
+    - **get_best_model()**: выбирает наилучшую модель по указанной метрике;
+    - **plot_roc_curve()**: отображает графики roc-auc кривых;
+    - **optimize_classification_threshold()**: находит оптимальный порог классификации для выбранной метрики;
+    - **evaluate_with_optimal_threshold()**: переоценка моделей с оптимальным порогом;
+    - **save_model()**: сохраняет модель по указанному имени, с возможностью сохранения метрик;
+    - **load_model_in_trainer()**: загружает модель в класс TrainModel для дальнейшего обучения;
+    - **create_final_report()**: создает финальный отчет по модели;
+    - **plot_confusion_matrix_final()**: отрисовывает confusion matrix для анализа ошибок;
+    - **plot_feature_importance()**: визуализирует важность признаков;
+    """
+
     def __init__(self, X_train, X_test, y_train, y_test):
         self.X_train = X_train
         self.X_test = X_test
@@ -23,8 +41,12 @@ class TrainModels:
         self.predictions = {}
         self.model_manager = ModelManager()
     
-    def fit_models(self,):
-        """ Обучает модели """
+    def fit_models(self):
+        """ 
+        Обучает модели 
+        
+        **return**: словарь с обученными моделями
+        """
         logistic_regression = LogisticRegression(random_state=42, max_iter=1000)
         logistic_regression.fit(self.X_train, self.y_train)
         self.models['LogisticRegression'] = logistic_regression
@@ -56,7 +78,11 @@ class TrainModels:
         return self.models
     
     def add_tuned_models(self, tuned_models_dict):
-        """ Добавляет к общему списку моделей наши продвинутые модели """
+        """
+        Добавляет к общему списку моделей наши продвинутые модели
+
+        **return**: обновленный словарь моделей
+        """
         for name, model in tuned_models_dict.items():
             model.fit(self.X_train, self.y_train)
             self.models[name] = model
@@ -64,7 +90,11 @@ class TrainModels:
         return self.models
     
     def evaluate_models(self):
-        """ Считает предсказания и метрики """
+        """
+        Считает предсказания и метрики.
+
+        **return**: словарь с метриками для каждой модели  
+        """
         for name_model, model in self.models.items():
             y_pred_test = model.predict(self.X_test)
             y_pred_proba_test = model.predict_proba(self.X_test)[:, 1]
@@ -91,7 +121,11 @@ class TrainModels:
         return self.predictions
     
     def compare_models_performance(self):
-        """Сравнивает производительность всех моделей"""
+        """
+        Сравнивает производительность всех моделей.
+        
+        **return**: pd.Dataframe таблицу с результатами метрик всех моделей
+        """
         comparison_data = []
         
         for model_name, metrics in self.predictions.items():
@@ -111,6 +145,14 @@ class TrainModels:
         return comparison_df
     
     def get_best_model(self, metric='test_roc_auc'):
+        """
+        Выбирает наилучшую модель по указанной метрике.
+
+        ### Argument:
+            metric='test_roc_auc': метрика, по которой будет оцениваться модель
+
+        **return**: возвращает название лучшей модели и результат по указанной метрике
+        """
         best_model_name = None
         best_score = -1
         
@@ -141,7 +183,15 @@ class TrainModels:
             plt.show()
 
     def optimize_classification_threshold(self, model_name, metric='f1'):
-        """Находит оптимальный порог классификации для выбранной метрики"""
+        """
+        Находит оптимальный порог классификации для выбранной метрики
+        
+        ### Arguments: 
+            model_name: имя модели
+            metric(default='f1'): метрика для которой будем подбирать оптимальный порог
+
+        **return**: Возвращает наилучший порог классификации и наилучший score
+        """
         
         model = self.models[model_name]
         y_pred_proba = model.predict_proba(self.X_test)[:, 1]
@@ -170,7 +220,16 @@ class TrainModels:
         return best_threshold, best_score
     
     def evaluate_with_optimal_threshold(self, model_name, threshold):
-        """Переоценка модели с оптимальным порогом"""
+        """
+        Переоценка модели с оптимальным порогом
+
+        ### Arguments:
+
+            model_name: название модели
+            threshold: порог классификации
+
+        **return**: словарь с результатами подсчитанных метрик
+        """
         model = self.models[model_name]
         y_pred_proba = model.predict_proba(self.X_test)[:, 1]
         y_pred_optimal = (y_pred_proba >= threshold).astype(int)
@@ -189,6 +248,16 @@ class TrainModels:
         return optimal_metrics
     
     def save_model(self, model_name, metrics=None):
+        """
+        Сохраняет модель по указанному имени, с возможностью сохранения метрик.
+
+        ### Arguments:
+
+            model_name: название модели
+            metrics(default=None): метрики, которые будем хранить вместе с моделью
+
+        **return**: сохраненную модель
+        """
         model = self.models[model_name]
         metadata = {
             'model_name': model,
@@ -202,6 +271,15 @@ class TrainModels:
         return self.model_manager.save_model(model, model_name, metadata)
     
     def load_model_in_trainer(self, model_name_or_path, new_name=None):
+        """
+        Загружает модель в класс TrainModel для дальнейшего обучения
+
+        ### Arguments:
+            model_name_or_path: название модели или путь к модели
+            new_name(default=None): новое имя модели
+
+        **return**: модель
+        """
         model = self.model_manager.load_model(model_name_or_path)
 
         if new_name:
@@ -214,7 +292,16 @@ class TrainModels:
         return model
 
     def create_final_report(self, model_name, threshold=0.5):
-        """Создаёт финальный отчёт по модели"""
+        """
+        Создаёт финальный отчёт по модели.
+
+        ### Arguments: 
+
+            model_name: название модели
+            threshold(default=0.5): порог классификации
+
+        **return**: словарь, содержащий метрики модели, а также порог классификации
+        """
         model = self.models[model_name]
         
         y_pred_proba = model.predict_proba(self.X_test)[:, 1]
@@ -232,7 +319,15 @@ class TrainModels:
         
         return report
 
-    def plot_confusion_matrix_final(self, model_name, threshold=0.5):        
+    def plot_confusion_matrix_final(self, model_name, threshold=0.5):
+        """
+        Отрисовывает confusion matrix, для анализа ошибок.
+
+        ### Arguments: 
+
+            model_name: название модели
+            threshold(default=0.5): порог классификации
+        """        
         model = self.models[model_name]
         y_pred_proba = model.predict_proba(self.X_test)[:, 1]
         y_pred = (y_pred_proba >= threshold).astype(int)
@@ -250,7 +345,14 @@ class TrainModels:
         print(f"   Правильно найденные уходящие: {tp} клиентов")
 
     def plot_feature_importance(self, model_name, top_n=15):
-        """Визуализация важности признаков"""
+        """
+        Визуализация важности признаков
+
+        ### Arguments: 
+
+            model_name: название модели
+            top_n(default=15): количество отображаемых признаков
+        """
         model = self.models[model_name]
         
         if hasattr(model, 'feature_importances_'):

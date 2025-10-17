@@ -1,4 +1,3 @@
-# src/customer_generator.py
 import random
 import pandas as pd
 from typing import Dict, List
