@@ -6,6 +6,16 @@ import os
 
 class PrepareData:
     def __init__(self, df):
+        """
+        Класс для подготовки данных к моделированию. Включает следующие методы 
+
+        # Methods:
+            - **splitting()**: для выделения целевого и нецелевых признаков, разделение данных на train и test
+            - **scaling()**: масштабирование данных с помощью RobustScaler
+            - **balancing_classes**(random_state=42): балансировка тренировочного набора данных
+            - **save_to_pickle**(output_dir='../data/processed'): сохраняет выборки, scaler и название фичей по указанному пути
+            - **preparing()**: объединяет вышеперечисленные методы, совершает полную подготовку данных
+        """
         self.df = df.copy()
         self.X_train = None
         self.X_test = None
@@ -16,6 +26,11 @@ class PrepareData:
         self.scaler = None
 
     def splitting(self):
+        """
+        Метод для выделения целевого и нецелевых признаков, разделение данных на train и test
+
+            **return**: X_train, X_test, y_train, y_test
+        """
         X = self.df.drop(columns=['Exited'])
         y = self.df['Exited']        
         
@@ -29,6 +44,11 @@ class PrepareData:
         return self.X_train, self.X_test, self.y_train, self.y_test
     
     def scaling(self):
+        """
+        Метод для масштабирования данных с помощью RobustScaler
+
+            **return**: X_train, X_test
+        """
         self.scaler = RobustScaler()
 
         numeric_features = ['CreditScore', 'Age', 'Balance', 'EstimatedSalary']
@@ -43,6 +63,16 @@ class PrepareData:
         return self.X_train, self.X_test
     
     def balancing_classes(self, random_state=42):
+        """
+        Метод для балансировки тренировочного набора данных
+
+        **Argument**: 
+
+            random_state=42: устанавливает начальное состояние генератора случайных чисел. 
+            Нужен для того, чтобы использовался один и тот же набора данных.
+
+        **return**: X_train_balanced, y_train_balanced
+        """
         balancing_method = RandomUnderSampler(random_state=random_state)
 
         self.X_train_balanced, self.y_train_balanced = balancing_method.fit_resample(self.X_train, self.y_train)
@@ -51,6 +81,13 @@ class PrepareData:
     
         
     def save_to_pickle(self, output_dir='../data/processed'):
+        """
+        Метод для сохранения выборок, scaler и списка фичей по указанному пути
+
+        **Argument**:
+
+            output_dir='../data/processed': путь, по которому будут храниться данные
+        """
         os.makedirs(output_dir, exist_ok=True)
         
         joblib.dump(self.X_train_balanced, f'{output_dir}/X_train.pkl')
@@ -64,6 +101,11 @@ class PrepareData:
         print(f"✅ Данные и объекты сохранены в {output_dir}")
     
     def preparing(self):
+        """
+        Метод, который объединяет вышеперечисленные методы, совершает полную подготовку данных
+
+        **return**: X_train_balanced, X_test, y_train_balanced, y_test
+        """
 
         self.splitting()
         self.scaling()

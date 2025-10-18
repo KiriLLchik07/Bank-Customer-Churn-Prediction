@@ -1,4 +1,3 @@
-# src/predict_churn.py
 from typing import Any, Dict
 import pandas as pd
 import joblib
