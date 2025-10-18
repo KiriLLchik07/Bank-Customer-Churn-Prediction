@@ -6,7 +6,7 @@
 [![CatBoost](https://img.shields.io/badge/catboost-1.2.8-yellow.svg)](https://catboost.ai/)
 [![XGBoost](https://img.shields.io/badge/xgboost-3.0.5-red.svg)](https://xgboost.ai/)
 [![LightGBM](https://img.shields.io/badge/lightgbm-4.6.0-lightblue.svg)](https://lightgbm.readthedocs.io/)
-[![Imbalanced-learn](https://img.shields.io/badge/imbalanced-learn-0.14.0-yellow.svg)](https://imbalanced-learn.org/stable/)
+[![Imbalanced-learn](https://img.shields.io/badge/imbalanced--learn-0.14.0-yellow.svg)](https://imbalanced-learn.org/stable/)
 [![Optuna](https://img.shields.io/badge/optuna-4.5.0-purple.svg)](https://optuna.org/)
 [![SHAP](https://img.shields.io/badge/shap-0.48.0-success.svg)](https://shap.readthedocs.io/)
 [![Pandas](https://img.shields.io/badge/pandas-2.0.0-150458.svg)](https://pandas.pydata.org/)
