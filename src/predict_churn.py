@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import Any, Dict
 import pandas as pd
 import joblib
@@ -5,15 +6,19 @@ import yaml
 import operator
 
 class CustomerChurnPredictor:
-    def __init__(self, model_path='../models/catboost_tuned_20251010_190010.pkl'):
+    def __init__(self, model_path: str = None):
         """
         Инициализация прогнозировщика с конфигурационными файлами
         """
+        project_root = Path(__file__).parent.parent
+
+        if model_path is None:
+            model_path = project_root / "models" / "catboost_tuned_20251010_190010.pkl"
 
         self.model = joblib.load(model_path)
 
-        self.risk_factors_config = self._load_config('../config/risk_factors.yaml')
-        self.recommendations_config = self._load_config('../config/recommendations.yaml')
+        self.risk_factors_config = self._load_config(project_root / "config" / "risk_factors.yaml")
+        self.recommendations_config = self._load_config(project_root / "config" / "recommendations.yaml")
 
         self.operators = {
             '>': operator.gt,
@@ -84,7 +89,7 @@ class CustomerChurnPredictor:
                     recommendations.extend(condition.get('messages', []))
 
         prob_config = self.recommendations_config.get('recommendations', {}).get('probability', {})
-        for condition in prob_config.get('condition', []):
+        for condition in prob_config.get('conditions', []):
             if self._check_condition(probability, condition['value']):
                 recommendations.extend(condition.get('messages', []))
 
