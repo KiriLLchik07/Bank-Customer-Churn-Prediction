@@ -1,0 +1,8 @@
+[theme]
+base="dark"
+primaryColor="forestGreen"
+backgroundColor="#14161bff"
+font = "SB-Sans-Display, system-ui, sans-serif"
+
+[theme.sidebar]
+backgroundColor="#262730"
