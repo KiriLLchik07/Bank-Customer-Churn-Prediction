@@ -19,6 +19,11 @@ catboost = "^1.2.8"
 lightgbm = "^4.6.0"
 xgboost = "^3.0.5"
 imbalanced-learn = "^0.14.0"
+shap = "^0.48.0"
+fastapi = "^0.119.0"
+uvicorn = "^0.37.0"
+pydantic = "^2.12.3"
+streamlit = "^1.50.0"
 
 [build-system]
 requires = ["poetry-core"]
