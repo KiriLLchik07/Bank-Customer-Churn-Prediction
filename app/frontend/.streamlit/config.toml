@@ -1,6 +1,6 @@
 [theme]
 base="dark"
-primaryColor="forestGreen"
+primaryColor="#b8860b"
 backgroundColor="#14161bff"
 font = "SB-Sans-Display, system-ui, sans-serif"
 
