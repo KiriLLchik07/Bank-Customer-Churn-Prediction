@@ -1,0 +1,151 @@
+/* Стили для страницы предсказаний */
+.prediction-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.risk-critical {
+  background: linear-gradient(135deg, #ff4d4f, #d9363e);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin: 1rem 0;
+  border-left: 6px solid #ff0000;
+  box-shadow: 0 4px 12px rgba(255, 77, 79, 0.3);
+}
+
+.risk-high {
+  background: linear-gradient(135deg, #ffa940, #fa8c16);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin: 1rem 0;
+  border-left: 6px solid #ff7a45;
+  box-shadow: 0 4px 12px rgba(255, 169, 64, 0.3);
+}
+
+.risk-medium {
+  background: linear-gradient(135deg, #ffec3d, #fadb14);
+  color: #1f2937;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin: 1rem 0;
+  border-left: 6px solid #ffc53d;
+  box-shadow: 0 4px 12px rgba(255, 236, 61, 0.3);
+}
+
+.risk-low {
+  background: linear-gradient(135deg, #73d13d, #52c41a);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin: 1rem 0;
+  border-left: 6px solid #95de64;
+  box-shadow: 0 4px 12px rgba(115, 209, 61, 0.3);
+}
+
+.customer-profile {
+  background: rgba(42, 47, 56, 0.6);
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin: 1rem 0;
+  border-left: 4px solid #b8860b;
+  transition: transform 0.2s ease;
+}
+
+.customer-profile:hover {
+  transform: translateY(-2px);
+}
+
+.factor-item {
+  background: rgba(37, 42, 50, 0.8);
+  padding: 1rem;
+  margin: 0.5rem 0;
+  border-radius: 8px;
+  border-left: 3px solid #5294e2;
+  transition: all 0.3s ease;
+}
+
+.factor-item:hover {
+  background: rgba(37, 42, 50, 0.9);
+  transform: translateX(5px);
+}
+
+.recommendation-item {
+  background: rgba(37, 42, 50, 0.8);
+  padding: 1rem;
+  margin: 0.5rem 0;
+  border-radius: 8px;
+  border-left: 3px solid #2ebd85;
+  transition: all 0.3s ease;
+}
+
+.recommendation-item:hover {
+  background: rgba(37, 42, 50, 0.9);
+  transform: translateX(5px);
+}
+
+/* Стили для метрик предсказания */
+.prediction-metric {
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: rgba(37, 42, 50, 0.8);
+  border: 1px solid #2a2f38;
+  transition: all 0.3s ease;
+}
+
+.prediction-metric:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Анимации для результатов */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.risk-critical,
+.risk-high,
+.risk-medium,
+.risk-low {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Стили для кнопок примеров */
+.example-button {
+  width: 100%;
+  margin: 0.5rem 0;
+  transition: all 0.3s ease;
+}
+
+.example-button:hover {
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .prediction-metric {
+    padding: 1rem;
+    margin: 0.5rem 0;
+  }
+
+  .risk-critical,
+  .risk-high,
+  .risk-medium,
+  .risk-low {
+    padding: 1rem;
+    margin: 0.5rem 0;
+  }
+
+  .customer-profile {
+    padding: 1rem;
+    margin: 0.5rem 0;
+  }
+}
