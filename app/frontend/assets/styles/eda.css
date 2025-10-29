@@ -1,0 +1,278 @@
+.eda-container {
+  max-width: 100%;
+  padding: 0 2rem;
+}
+
+/* Заголовки EDA */
+
+.eda-subtitle {
+  font-size: 1.8rem;
+  margin: 2rem 0 1rem 0;
+  border-bottom: 2px solid #b8860b;
+  padding-bottom: 0.5rem;
+}
+
+/* Карточки для EDA */
+.eda-card {
+  background: rgba(37, 42, 50, 0.8);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #2a2f38;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 1rem 0;
+  transition: all 0.3s ease;
+}
+
+.eda-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  border-color: #b8860b;
+}
+
+/* Метрики в EDA */
+.eda-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.eda-metric {
+  background: linear-gradient(135deg, #252a32, #1b1e24);
+  padding: 1.2rem;
+  border-radius: 8px;
+  text-align: center;
+  border-left: 4px solid #b8860b;
+}
+
+.eda-metric-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #b8860b;
+  margin-bottom: 0.5rem;
+}
+
+.eda-metric-label {
+  font-size: 0.9rem;
+}
+
+.eda-card-data-overview-card {
+  font-size: 24px;
+  background: rgba(37, 42, 50, 0.8);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #2a2f38;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 1rem 0;
+  transition: all 0.3s ease;
+}
+
+/* Стили для графиков */
+.plotly-chart-container {
+  border-radius: 8px;
+  padding: 1rem;
+  background: rgba(42, 47, 56, 0.6);
+  margin: 1rem 0;
+}
+
+/* Таблицы в EDA */
+.eda-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  background: rgba(37, 42, 50, 0.8);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.eda-table th {
+  background: #252a32;
+  color: #b8860b;
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid #b8860b;
+}
+
+.eda-table td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid #2a2f38;
+  color: #a0a5b0;
+}
+
+.eda-table tr:hover {
+  background: rgba(184, 134, 11, 0.1);
+}
+
+/* Статистические инсайты */
+.insight-card {
+  background: rgba(42, 47, 56, 0.6);
+  padding: 1.2rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  border-left: 4px solid #ff9933;
+}
+
+.insight-strong {
+  background: rgba(82, 148, 226, 0.1);
+  border-left-color: #5294e2;
+}
+
+.insight-moderate {
+  background: rgba(255, 193, 7, 0.1);
+  border-left-color: #ffc107;
+}
+
+.insight-weak {
+  background: rgba(108, 117, 125, 0.1);
+  border-left-color: #6c757d;
+}
+
+/* Корреляционная матрица */
+.correlation-matrix {
+  background: rgba(37, 42, 50, 0.8);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+}
+
+.correlation-high {
+  color: #ff4d4f;
+  font-weight: bold;
+}
+
+.correlation-medium {
+  color: #ffc107;
+  font-weight: 600;
+}
+
+.correlation-low {
+  color: #2ebd85;
+}
+
+/* Выводы и рекомендации */
+.conclusion-section {
+  margin: 2rem 0;
+}
+
+.conclusion-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.conclusion-card {
+  background: rgba(42, 47, 56, 0.6);
+  padding: 1.5rem;
+  border-radius: 8px;
+  height: 100%;
+}
+
+.conclusion-high-risk {
+  border-left: 4px solid #ff4d4f;
+}
+
+.conclusion-low-risk {
+  border-left: 4px solid #2ebd85;
+}
+
+.conclusion-statistical {
+  border-left: 4px solid #5294e2;
+}
+
+.conclusion-business {
+  border-left: 4px solid #b8860b;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .eda-container {
+    padding: 0 1rem;
+  }
+
+  .eda-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .conclusion-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .eda-title {
+    font-size: 2rem;
+  }
+
+  .eda-subtitle {
+    font-size: 1.5rem;
+  }
+}
+
+/* Анимации */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.eda-card,
+.plotly-chart-container,
+.insight-card {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* Специфичные стили для разделов EDA */
+.data-overview-card {
+  border-left: 4px solid #5294e2;
+}
+
+.churn-analysis-card {
+  border-left: 4px solid #ff4d4f;
+}
+
+.numerical-analysis-card {
+  border-left: 4px solid #2ebd85;
+}
+
+.correlation-analysis-card {
+  border-left: 4px solid #9c27b0;
+}
+
+.conclusions-card {
+  border-left: 4px solid #b8860b;
+}
+
+/* Стили для боковой панели навигации */
+.sidebar-nav {
+  background: rgba(37, 42, 50, 0.8);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.sidebar-nav-item {
+  padding: 0.8rem 1rem;
+  margin: 0.25rem 0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #a0a5b0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar-nav-item:hover {
+  background: rgba(184, 134, 11, 0.2);
+  color: #b8860b;
+}
+
+.sidebar-nav-item.active {
+  background: rgba(184, 134, 11, 0.3);
+  color: #b8860b;
+  border-left: 3px solid #b8860b;
+}
