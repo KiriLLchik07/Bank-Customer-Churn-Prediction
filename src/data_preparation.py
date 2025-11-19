@@ -98,7 +98,7 @@ class PrepareData:
         joblib.dump(self.scaler, f'{output_dir}/scaler.pkl')
         joblib.dump(self.X_train.columns.tolist(), f'{output_dir}/feature_names.pkl')
         
-        print(f"✅ Данные и объекты сохранены в {output_dir}")
+        print(f"Данные и объекты сохранены в {output_dir}")
     
     def preparing(self):
         """

@@ -71,7 +71,7 @@ class ProprocessingData:
         """
         Метод для создания новых фичей
         """
-        print("\n🎯 Создание новых признаков...")
+        print("\nСоздание новых признаков...")
         
         self.df['Is_Senior_Active'] = ((self.df['Age'] > 40) & 
                                     (self.df['IsActiveMember'] == 1)).astype(int)
@@ -108,14 +108,14 @@ class ProprocessingData:
         new_features = ['Is_Senior_Active', 'New_HighRisk', 
                         'Active_With_Multiple_Products', 'Value_Client', 'German_Female_Risk']
         
-        print("\n🔍 Корреляции новых признаков: (крит. значение считаем >= 0.6)")
+        print("\nКорреляции новых признаков: (крит. значение считаем >= 0.6)")
         for new_feat in new_features:
             correlations = corr_matrix[new_feat].sort_values(ascending=False)
             high_corr = correlations[abs(correlations) >= 0.5]
             if len(high_corr) > 1:
                 print(f"{new_feat}: {high_corr.to_dict()}")
             else:
-                print(f"{new_feat}: ✅ Нет сильных корреляций")
+                print(f"{new_feat}: Нет сильных корреляций")
         
         return corr_matrix
 
@@ -147,5 +147,5 @@ class ProprocessingData:
         self.create_new_features()
         self.check_new_features_correlation()
         self.encode_categorical_features()
-        print("\n✅ Предобработка завершена!")
+        print("\nПредобработка завершена!")
         return self.df

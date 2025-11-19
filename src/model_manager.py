@@ -40,7 +40,7 @@ class ModelManager:
         model_path = os.path.join(self.models_dir, model_files[0])
         
         model = joblib.load(model_path)
-        print(f"✅ Модель загружена: {model_path}")
+        print(f"Модель загружена: {model_path}")
         return model
     
     def get_model_metadata(self, model_name):

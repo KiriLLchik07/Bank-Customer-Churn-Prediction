@@ -19,7 +19,7 @@ load_css()
 
 st.markdown("""
 <div class="eda-container">
-    <h1 class="eda-title">🤖 Моделирование и эксперименты</h1>
+    <h1 class="eda-title">Моделирование и эксперименты</h1>
     <div class="eda-card">
         <p style="text-align: center; font-size: 1.2rem; margin: 0;">
             Сравнение ML-алгоритмов, оптимизация гиперпараметров и выбор лучшей модели для прогнозирования оттока клиентов.
@@ -30,7 +30,7 @@ st.markdown("""
 
 st.sidebar.markdown("""
 <div class="sidebar-nav">
-    <h3 style="margin-bottom: 1rem; border-bottom: 1px solid #2a2f38; padding-bottom: 0.5rem;">🔍 Навигация по моделированию</h3>
+    <h3 style="margin-bottom: 1rem; border-bottom: 1px solid #2a2f38; padding-bottom: 0.5rem;">Навигация по моделированию</h3>
 """, unsafe_allow_html=True)
 
 section = st.sidebar.radio(
@@ -80,7 +80,7 @@ def load_modeling_data():
 model_comparison_df, feature_importance_df, catboost_params_df = load_modeling_data()
 
 if section == "Обзор эксперимента":
-    st.markdown('<h2 class="eda-subtitle">🎯 Обзор эксперимента</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="eda-subtitle">Обзор эксперимента</h2>', unsafe_allow_html=True)
     
     col1, col2 = st.columns(2)
     
@@ -148,7 +148,7 @@ if section == "Обзор эксперимента":
         """, unsafe_allow_html=True)
 
 elif section == "Сравнение моделей":
-    st.markdown('<h2 class="eda-subtitle">📊 Сравнение моделей</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="eda-subtitle">Сравнение моделей</h2>', unsafe_allow_html=True)
     
     st.subheader("Сравнительная таблица моделей")
     st.dataframe(model_comparison_df.style.format({
@@ -193,7 +193,7 @@ elif section == "Сравнение моделей":
     
     st.markdown("""
     <div class="insight-card insight-strong">
-        <h4>🔍 Ключевые наблюдения</h4>
+        <h4>Ключевые наблюдения</h4>
         <ul>
             <li><strong>CatBoost показал наилучшие результаты</strong> после тюнинга гиперпараметров</li>
             <li><strong>Ансамблевые методы</strong> превосходят базовые алгоритмы</li>
@@ -204,7 +204,7 @@ elif section == "Сравнение моделей":
     """, unsafe_allow_html=True)
 
 elif section == "Оптимизация гиперпараметров":
-    st.markdown('<h2 class="eda-subtitle">⚙️ Оптимизация гиперпараметров</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="eda-subtitle">Оптимизация гиперпараметров</h2>', unsafe_allow_html=True)
     
     col1, col2 = st.columns(2)
     
@@ -267,7 +267,7 @@ elif section == "Оптимизация гиперпараметров":
     """, unsafe_allow_html=True)
 
 elif section == "Анализ результатов":
-    st.markdown('<h2 class="eda-subtitle">📈 Анализ результатов</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="eda-subtitle">Анализ результатов</h2>', unsafe_allow_html=True)
     
     col1, col2 = st.columns(2)
     
@@ -304,8 +304,8 @@ elif section == "Анализ результатов":
                 <p><strong>Метод:</strong> Максимизация F1-Score</p>
                 <p><strong>Бизнес-интерпретация:</strong></p>
                 <ul>
-                    <li>📈 <strong>Высокий Recall</strong> (65%) - находим большинство уходящих</li>
-                    <li>🎯 <strong>Умеренный Precision</strong> (62%) - минимизируем ложные тревоги</li>
+                    <li><strong>Высокий Recall</strong> (65%) - находим большинство уходящих</li>
+                    <li><strong>Умеренный Precision</strong> (62%) - минимизируем ложные тревоги</li>
                 </ul>
             </div>
         </div>
@@ -340,7 +340,7 @@ elif section == "Анализ результатов":
         """, unsafe_allow_html=True)
 
 elif section == "Важность признаков":
-    st.markdown('<h2 class="eda-subtitle">🔍 Важность признаков</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="eda-subtitle">Важность признаков</h2>', unsafe_allow_html=True)
     
     col1, col2 = st.columns([2, 1])
     
@@ -362,10 +362,10 @@ elif section == "Важность признаков":
     with col2:
         st.markdown("""
         <div class="eda-card">
-            <h3 style="color: #b8860b;">🎯 Ключевые факторы</h3>
+            <h3 style="color: #b8860b;">Ключевые факторы</h3>
             <div style="color: #a0a5b0;">
                 <div style="margin-bottom: 1rem;">
-                    <strong>🏆 Топ-5 признаков:</strong>
+                    <strong>Топ-5 признаков:</strong>
                     <ol>
                         <li>NumOfProducts (24.3%)</li>
                         <li>Age (18.7%)</li>
@@ -410,7 +410,7 @@ elif section == "Финальные выводы":
     with col1:
         st.markdown("""
         <div class="conclusion-card conclusion-high-risk" style="margin-top:15px;">
-            <h4>✅ Достигнутые цели</h4>
+            <h4>Достигнутые цели</h4>
             <ul>
                 <li>Выбрана оптимальная модель - CatBoost</li>
                 <li>Оптимизированы гиперпараметры с Optuna</li>
@@ -423,7 +423,7 @@ elif section == "Финальные выводы":
         
         st.markdown("""
         <div class="conclusion-card conclusion-business" style="margin-top:15px">
-            <h4>🚀 Практическая ценность</h4>
+            <h4>Практическая ценность</h4>
             <ul>
                 <li><strong>ROC-AUC 0.872</strong> - отличное качество предсказаний</li>
                 <li><strong>F1-Score 0.635</strong> - хороший баланс метрик</li>
@@ -436,7 +436,7 @@ elif section == "Финальные выводы":
     with col2:
         st.markdown("""
         <div class="conclusion-card conclusion-statistical" style="margin-top:15px">
-            <h4>🤖 Рекомендации по использованию</h4>
+            <h4>Рекомендации по использованию</h4>
             <div>
                 <p><strong>Продакшн-развертывание:</strong></p>
                 <ul>
@@ -490,7 +490,7 @@ st.markdown("---")
 st.markdown("""
 <div class="footer">
     <p style="text-align: center; color: #6c727d; margin: 0;">
-        🤖 Моделирование выполнено с использованием CatBoost, LightGBM, XGBoost и Optuna
+        Моделирование выполнено с использованием CatBoost, LightGBM, XGBoost и Optuna
     </p>
 </div>
 """, unsafe_allow_html=True)

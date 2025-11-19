@@ -65,20 +65,20 @@ def predict_churn(customer_data: dict) -> dict:
 
 st.markdown("""
 <div class="eda-container">
-    <h1 class="eda-title">🔮 Предсказать отток клиента</h1>
+    <h1 class="eda-title">Предсказать отток клиента</h1>
 </div>
 """, unsafe_allow_html=True)
 
 st.sidebar.markdown("""
 <div class="sidebar-nav">
-    <h3 style="margin-bottom: 1rem; border-bottom: 1px solid #2a2f38; padding-bottom: 0.5rem;">🔧 Статус системы</h3>
+    <h3 style="margin-bottom: 1rem; border-bottom: 1px solid #2a2f38; padding-bottom: 0.5rem;">Статус системы</h3>
 """, unsafe_allow_html=True)
 
 api_status = check_api_health()
 if api_status:
-    st.sidebar.success("✅ API активно")
+    st.sidebar.success("API активно")
 else:
-    st.sidebar.error("❌ API недоступно")
+    st.sidebar.error("API недоступно")
     st.sidebar.info("""
     **Для запуска API выполните:**
     ```bash
@@ -91,7 +91,7 @@ st.sidebar.markdown("</div>", unsafe_allow_html=True)
 
 st.sidebar.markdown("""
 <div class="sidebar-nav">
-    <h3 style="margin-bottom: 1rem; border-bottom: 1px solid #2a2f38; padding-bottom: 0.5rem;">📋 Данные клиента</h3>
+    <h3 style="margin-bottom: 1rem; border-bottom: 1px solid #2a2f38; padding-bottom: 0.5rem;">Данные клиента</h3>
 """, unsafe_allow_html=True)
 
 st.sidebar.subheader("Демография")
@@ -120,7 +120,7 @@ predict_btn = st.sidebar.button("Предсказать риск оттока",
 st.sidebar.markdown("</div>", unsafe_allow_html=True)
 
 if predict_btn:
-    with st.spinner("🤖 Анализируем данные клиента с помощью ML модели..."):
+    with st.spinner("Анализируем данные клиента с помощью ML модели..."):
         customer_data = {
             "CreditScore": credit_score,
             "Geography": geography,
@@ -137,7 +137,7 @@ if predict_btn:
         result = predict_churn(customer_data)
         
         if result['success']:
-            st.markdown('<h2 class="eda-subtitle" style="margin:10px">📊 Результаты анализа</h2>', unsafe_allow_html=True)
+            st.markdown('<h2 class="eda-subtitle" style="margin:10px">Результаты анализа</h2>', unsafe_allow_html=True)
             
             col1, col2, col3 = st.columns(3)
             
@@ -189,20 +189,20 @@ if predict_btn:
             
             st.markdown("""
             <div class="eda-card">
-                <h3 style="color: #b8860b; margin-bottom: 1rem;">🔍 Факторы риска</h3>
+                <h3 style="color: #b8860b; margin-bottom: 1rem;">Факторы риска</h3>
             """, unsafe_allow_html=True)
             
             if result['risk_factors']:
                 for factor in result['risk_factors']:
                     st.markdown(f'<div class="factor-item">• {factor}</div>', unsafe_allow_html=True)
             else:
-                st.info("✅ Нет значимых факторов риска")
+                st.info("Нет значимых факторов риска")
             
             st.markdown('</div>', unsafe_allow_html=True)
             
             st.markdown("""
             <div class="eda-card">
-                <h3 style="color: #b8860b; margin-bottom: 1rem;">💡 Рекомендации по удержанию</h3>
+                <h3 style="color: #b8860b; margin-bottom: 1rem;">Рекомендации по удержанию</h3>
             """, unsafe_allow_html=True)
             
             for recommendation in result.get('recommendations', []):
@@ -213,7 +213,7 @@ if predict_btn:
             if result.get('key_metrics'):
                 st.markdown("""
                 <div class="eda-card">
-                    <h3 style="color: #b8860b; margin-bottom: 1rem;">📈 Ключевые метрики клиента</h3>
+                    <h3 style="color: #b8860b; margin-bottom: 1rem;">Ключевые метрики клиента</h3>
                 """, unsafe_allow_html=True)
                 
                 for metric, value in result['key_metrics'].items():
@@ -221,16 +221,16 @@ if predict_btn:
                 
                 st.markdown('</div>', unsafe_allow_html=True)
             
-            with st.expander("📋 Детали введенных данных"):
+            with st.expander("Детали введенных данных"):
                 st.json(customer_data)
                 
         else:
-            st.error(f"❌ {result.get('error', 'Unknown error')}")
+            st.error(f"{result.get('error', 'Unknown error')}")
 
 else:
     if not api_status:
         st.error("""
-        ## ❌ FastAPI сервер недоступен
+        ## FastAPI сервер недоступен
         
         **Для работы предсказаний необходимо запустить бэкенд:**
         
@@ -256,7 +256,7 @@ else:
     with col1:
         st.markdown("""
         <div class="conclusion-card conclusion-high-risk">
-            <h4>🚨 Клиент высокого риска</h4>
+            <h4>Клиент высокого риска</h4>
             <ul>
                 <li>1 продукт банка</li>
                 <li>Неактивный клиент</li>
@@ -271,7 +271,7 @@ else:
     with col2:
         st.markdown("""
         <div class="conclusion-card conclusion-low-risk">
-            <h4>🟢 Клиент низкого риска</h4>
+            <h4>Клиент низкого риска</h4>
             <ul>
                 <li>3+ продукта банка</li>
                 <li>Активный клиент</li>
@@ -322,7 +322,7 @@ st.markdown("---")
 st.markdown("""
 <div class="footer">
     <p style="text-align: center; color: #6c727d; margin: 0;">
-        🔮 Предсказания выполняются через FastAPI бэкенд с использованием CatBoost модели
+        Предсказания выполняются через FastAPI бэкенд с использованием CatBoost модели
     </p>
 </div>
 """, unsafe_allow_html=True)

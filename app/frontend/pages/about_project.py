@@ -28,7 +28,7 @@ col1, col2 = st.columns([1, 1])
 with col1:
     st.markdown("""
     <div class="section">
-        <h2>🎯 Ценность для бизнеса</h2>
+        <h2>Ценность для бизнеса</h2>
         <div class="card">
             <ul class="value-list">
                 <li><strong>Снижение оттока</strong> на 20-30% через превентивные меры</li>
@@ -43,7 +43,7 @@ with col1:
 with col2:
     st.markdown("""
     <div class="section">
-        <h2>🏆 Model Performance</h2>
+        <h2>Model Performance</h2>
         <div class="card">
             <div class="table-container">
                 <table class="performance-table">
@@ -88,9 +88,9 @@ with col2:
 # Ключевые выводы
 st.markdown("""
 <div class="section">
-    <h2>📊 Ключевые выводы</h2>
+    <h2>Ключевые выводы</h2>
     <div class="card">
-        <h3>🔍 Топ-4 фактора оттока:</h3>
+        <h3>Топ-4 фактора оттока:</h3>
         <div class="factors-grid">
             <div class="factor-card">
                 <div class="factor-number">1</div>
@@ -129,7 +129,7 @@ st.markdown("""
 st.markdown("""
 <div class="section">
     <div class="card">
-        <h3>👥 Портреты клиентов:</h3>
+        <h3>Портреты клиентов:</h3>
         <div class="customer-profiles">
             <div class="profile-high-risk">
                 <span class="profile-icon">🚨</span>
@@ -150,24 +150,24 @@ st.markdown("""
 
 st.markdown("""
 <div class="section">
-    <h2>📁 Project Structure</h2>
+    <h2>Project Structure</h2>
     <div class="card">
         <div class="project-structure">
             <code>Bank-Customer-Churn-Prediction/<br>
-├── ⚙️ config/               # Конфигурационные файлы<br>
+├── config/               # Конфигурационные файлы<br>
 │   ├── risk_factors.yaml    # Факторы риска<br>
 │   └── recommendations.yaml # Бизнес-рекомендации<br>
-├── 📊 data/                 # Исходные и обработанные данные<br>
-├── 🤖 models/               # Обученные модели<br>
-├── 📓 notebooks/            # Jupyter notebooks для анализа<br>
+├── data/                 # Исходные и обработанные данные<br>
+├── models/               # Обученные модели<br>
+├── notebooks/            # Jupyter notebooks для анализа<br>
 │   ├── 01_primary_data_review.ipynb<br>
 │   ├── 02_eda_analysis.ipynb<br>
 │   ├── 03_preprocessing.ipynb<br>
 │   ├── 04_data_preparation.ipynb<br>
 │   ├── 05_modeling_and_experiments.ipynb<br>
 │   └── 06_model_interpretation.ipynb<br>
-├── 📈 reports/              # Отчеты и визуализации<br>
-├── 🔧 src/                  # Исходный код<br>
+├── reports/              # Отчеты и визуализации<br>
+├── src/                  # Исходный код<br>
 │   ├── customer_generator.py<br>
 │   ├── data_preparation.py<br>
 │   ├── hyperparametr_config.py<br>
@@ -176,9 +176,9 @@ st.markdown("""
 │   ├── model_training.py<br>
 │   ├── predict_churn.py<br>
 │   └── preprocessing.py<br>
-├── 🐳 app/                  # FastAPI и Streamlit приложения<br>
-├── 📄 README.md<br>
-└── 📋 pyproject.toml        # Зависимости проекта</code>
+├── app/                  # FastAPI и Streamlit приложения<br>
+├── README.md<br>
+└── pyproject.toml        # Зависимости проекта</code>
         </div>
     </div>
 </div>
@@ -187,9 +187,9 @@ st.markdown("""
 # Бизнес рекомендации
 st.markdown("""
 <div class="section">
-    <h2>💡 Бизнес рекомендации</h2>
+    <h2>Бизнес рекомендации</h2>
     <div class="card">
-        <h3>🎯 Приоритетные действия:</h3>
+        <h3>Приоритетные действия:</h3>
         <div class="table-container">
             <table class="risk-table">
                 <thead>
@@ -245,7 +245,7 @@ st.markdown("""
 # Автор
 st.markdown("""
 <div class="section">
-    <h2>👥 Автор</h2>
+    <h2>Автор</h2>
     <div class="card author-card">
         <div class="author-info">
             <strong>Кирилл Есаков</strong><br>

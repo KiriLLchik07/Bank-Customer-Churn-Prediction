@@ -25,9 +25,9 @@ async def lifespan(app: FastAPI):
         project_root = Path(__file__).parent.parent.parent
         model_path = project_root / "models" / "catboost_tuned_20251010_190010.pkl"
         predictor = CustomerChurnPredictor(model_path=str(model_path))
-        print("✅ ML модель успешно загружена")
+        print("ML модель успешно загружена")
     except Exception as e:
-        print(f"❌ Ошибка загрузки модели: {e}")
+        print(f"Ошибка загрузки модели: {e}")
         predictor = None
 
     yield
