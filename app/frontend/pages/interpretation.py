@@ -19,7 +19,7 @@ load_css()
 
 st.markdown("""
 <div class="eda-container">
-    <h1 class="eda-title">🔍 Интерпретация модели</h1>
+    <h1 class="eda-title">Интерпретация модели</h1>
     <div class="eda-card">
         <p style="text-align: center; font-size: 1.2rem; margin: 0;">
             SHAP анализ, бизнес-инсайты и портреты клиентов для понимания факторов оттока.
@@ -30,7 +30,7 @@ st.markdown("""
 
 st.sidebar.markdown("""
 <div class="sidebar-nav">
-    <h3 style="margin-bottom: 1rem; border-bottom: 1px solid #2a2f38; padding-bottom: 0.5rem;">🔍 Навигация по интерпретации</h3>
+    <h3 style="margin-bottom: 1rem; border-bottom: 1px solid #2a2f38; padding-bottom: 0.5rem;">Навигация по интерпретации</h3>
 """, unsafe_allow_html=True)
 
 section = st.sidebar.radio(
@@ -75,7 +75,7 @@ def load_interpretation_data():
 shap_df, factors_df, profiles_df = load_interpretation_data()
 
 if section == "SHAP анализ":
-    st.markdown('<h2 class="eda-subtitle">📊 SHAP анализ модели</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="eda-subtitle">SHAP анализ модели</h2>', unsafe_allow_html=True)
     
     col1, col2 = st.columns(2)
     
@@ -93,8 +93,8 @@ if section == "SHAP анализ":
             <div style="margin-top: 1rem;">
                 <strong>Как интерпретировать:</strong>
                 <ul>
-                    <li><span style="color: #ff4d4f;">🔴 Положительные значения</span> - увеличивают вероятность оттока</li>
-                    <li><span style="color: #2ebd85;">🟢 Отрицательные значения</span> - уменьшают вероятность оттока</li>
+                    <li><span style="color: #ff4d4f;">Положительные значения</span> - увеличивают вероятность оттока</li>
+                    <li><span style="color: #2ebd85;">Отрицательные значения</span> - уменьшают вероятность оттока</li>
                     <li><strong>Высота столбца</strong> - сила влияния признака</li>
                 </ul>
             </div>
@@ -133,7 +133,7 @@ if section == "SHAP анализ":
         st.markdown('</div>', unsafe_allow_html=True)
 
 elif section == "Beeswarm график":
-    st.markdown('<h2 class="eda-subtitle">🎨 Beeswarm график SHAP значений</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="eda-subtitle">Beeswarm график SHAP значений</h2>', unsafe_allow_html=True)
     
     st.markdown("""
     <div class="eda-card">
@@ -187,7 +187,7 @@ elif section == "Beeswarm график":
     st.markdown("""
     <div class="plotly-chart-container">
         <div style="text-align: center; padding: 1rem;">
-            <h4>🎨 Beeswarm график SHAP значений</h4>
+            <h4>Beeswarm график SHAP значений</h4>
             <p><em>Визуализация влияния признаков на прогноз оттока для всех клиентов</em></p>
         </div>
     </div>
@@ -198,7 +198,7 @@ elif section == "Beeswarm график":
             caption="Beeswarm график SHAP значений: красный - высокие значения признака увеличивают риск оттока, синий - низкие значения уменьшают риск")
 
 elif section == "Важность признаков":
-    st.markdown('<h2 class="eda-subtitle">📈 Детальный анализ важности признаков</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="eda-subtitle">Детальный анализ важности признаков</h2>', unsafe_allow_html=True)
     
     col1, col2 = st.columns(2)
     
@@ -218,10 +218,10 @@ elif section == "Важность признаков":
     with col2:
         st.markdown("""
         <div class="eda-card">
-            <h3 style="color: #b8860b;">🎯 Бизнес-интерпретация</h3>
+            <h3 style="color: #b8860b;">Бизнес-интерпретация</h3>
             <div style="color: #a0a5b0;">
                 <div style="margin-bottom: 1rem;">
-                    <strong>🏆 Топ-5 влиятельных признаков:</strong>
+                    <strong>Топ-5 влиятельных признаков:</strong>
                     <ol>
                         <li><strong>NumOfProducts (28%)</strong> - Количество продуктов</li>
                         <li><strong>IsActiveMember (11%)</strong> - Активность клиента</li>
@@ -239,7 +239,7 @@ elif section == "Важность признаков":
     st.markdown('</div>', unsafe_allow_html=True)
 
 elif section == "Waterfall анализ":
-    st.markdown('<h2 class="eda-subtitle">🏞️ Waterfall анализ отдельных клиентов</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="eda-subtitle">Waterfall анализ отдельных клиентов</h2>', unsafe_allow_html=True)
     
     st.markdown("""
     <div class="eda-card">
@@ -311,13 +311,13 @@ elif section == "Waterfall анализ":
     st.markdown("""
     <div class="plotly-chart-container">
         <div style="text-align: center; padding: 1rem;">
-            <h4>🏞️ Waterfall анализ отдельных клиентов</h4>
+            <h4>Waterfall анализ отдельных клиентов</h4>
             <p><em>Детальный разбор вклада каждого признака в конкретные предсказания</em></p>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
-    tab1, tab2, tab3 = st.tabs(["🔴 Клиент высокого риска", "🟢 Клиент низкого риска", "🟡 Клиент среднего риска"])
+    tab1, tab2, tab3 = st.tabs(["Клиент высокого риска", "Клиент низкого риска", "Клиент среднего риска"])
 
     with tab1:
         st.subheader("Клиент #1 - Высокий риск оттока")
@@ -335,7 +335,7 @@ elif section == "Waterfall анализ":
                 caption="Waterfall график для клиента со средним риском оттока (15%)")
 
 elif section == "Портреты клиентов":
-    st.markdown('<h2 class="eda-subtitle">👥 Портреты клиентов по уровням риска</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="eda-subtitle">Портреты клиентов по уровням риска</h2>', unsafe_allow_html=True)
     
     st.markdown('<div class="eda-card"><h4>Сравнение профилей клиентов</h4>', unsafe_allow_html=True)
     
@@ -360,7 +360,7 @@ elif section == "Портреты клиентов":
     with col1:
         st.markdown("""
         <div class="conclusion-card conclusion-high-risk">
-            <h4>🚨 Клиент высокого риска</h4>
+            <h4>Клиент высокого риска</h4>
             <div>
                 <p><strong>Характеристики:</strong></p>
                 <ul>
@@ -378,7 +378,7 @@ elif section == "Портреты клиентов":
         
         st.markdown("""
         <div class="conclusion-card conclusion-statistical" style="margin-top: 15px">
-            <h4>🟡 Молодой неактивный клиент</h4>
+            <h4>Молодой неактивный клиент</h4>
             <div>
                 <p><strong>Характеристики:</strong></p>
                 <ul>
@@ -396,15 +396,15 @@ elif section == "Портреты клиентов":
     with col2:
         st.markdown("""
         <div class="conclusion-card conclusion-low-risk">
-            <h4>🟢 Клиент НИЗКОГО риска</h4>
-            <div style="color: #a0a5b0;">
+            <h4>Клиент низкого риска</h4>
+            <div>
                 <p><strong>Характеристики:</strong></p>
                 <ul>
-                    <li>📦 <strong>3+ продукта банка</strong></li>
-                    <li>⚡ <strong>Активен</strong> (IsActiveMember=1)</li>
-                    <li>👩 <strong>Возраст 20-35 лет</strong></li>
-                    <li>👩 <strong>Женский пол</strong></li>
-                    <li>💰 <strong>Средний баланс</strong></li>
+                    <li><strong>3+ продукта банка</strong></li>
+                    <li><strong>Активен</strong> (IsActiveMember=1)</li>
+                    <li><strong>Возраст 20-35 лет</strong></li>
+                    <li><strong>Женский пол</strong></li>
+                    <li><strong>Средний баланс</strong></li>
                 </ul>
                 <p><strong>Вероятность оттока: 1-5%</strong></p>
                 <p><strong>Бизнес-значение:</strong> Лояльная база, потенциал для кросс-продаж</p>
@@ -414,7 +414,7 @@ elif section == "Портреты клиентов":
         
         st.markdown("""
         <div class="conclusion-card conclusion-business" style="margin-top: 15px">
-            <h4>💎 VIP клиент</h4>
+            <h4>VIP клиент</h4>
             <div>
                 <p><strong>Характеристики:</strong></p>
                 <ul>
@@ -430,7 +430,7 @@ elif section == "Портреты клиентов":
         """, unsafe_allow_html=True)
 
 elif section == "Бизнес-рекомендации":
-    st.markdown('<h2 class="eda-subtitle">💡 Бизнес-рекомендации и действия</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="eda-subtitle">Бизнес-рекомендации и действия</h2>', unsafe_allow_html=True)
     
     col1, col2 = st.columns(2)
     
@@ -489,19 +489,19 @@ elif section == "Бизнес-рекомендации":
         <h4>Матрица принятия решений</h4>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
             <div>
-                <strong>📦 По количеству продуктов</strong>
+                <strong>По количеству продуктов</strong>
                 <p>1 продукт → Кросс-продажи<br>2 продукта → Удержание<br>3+ продукта → Лояльность</p>
             </div>
             <div>
-                <strong>⚡ По активности</strong>
+                <strong>По активности</strong>
                 <p>Неактивен → Реактивация<br>Активен → Поощрение<br>Очень активен → Премиум</p>
             </div>
             <div>
-                <strong>👥 По демографии</strong>
+                <strong>По демографии</strong>
                 <p>Молодой → Цифровизация<br>Средний возраст → Семейные пакеты<br>Старший → Надежность</p>
             </div>
             <div>
-                <strong>💰 По балансу</strong>
+                <strong>По балансу</strong>
                 <p>Низкий → Мотивация пополнений<br>Средний → Инвестиции<br>Высокий → Private banking</p>
             </div>
         </div>
@@ -513,7 +513,7 @@ st.markdown("---")
 st.markdown("""
 <div class="footer">
     <p style="text-align: center; color: #6c727d; margin: 0;">
-        🔍 Интерпретация выполнена с использованием SHAP анализа и бизнес-аналитики
+        Интерпретация выполнена с использованием SHAP анализа и бизнес-аналитики
     </p>
 </div>
 """, unsafe_allow_html=True)

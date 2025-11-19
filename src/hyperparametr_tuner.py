@@ -99,10 +99,10 @@ class HyperparametrTuner:
         if models_to_tune is None:
             models_to_tune = list(self.params_config.keys())
 
-        print(f"🎯 Запуск подбора гиперпараметров для: {models_to_tune}")
+        print(f"Запуск подбора гиперпараметров для: {models_to_tune}")
 
         for model_name in models_to_tune:
-            print(f"\n🔍 Оптимизация {model_name}...")
+            print(f"\nОптимизация {model_name}...")
             objective = self.gererate_objective(model_name, self.params_config[model_name])
             
             study = optuna.create_study(
@@ -114,7 +114,7 @@ class HyperparametrTuner:
             self.best_params[model_name] = study.best_params
             self.results[model_name] = study
 
-            print(f"✅ {model_name}: лучший {self.scoring} = {study.best_value:.4f}")
+            print(f"{model_name}: лучший {self.scoring} = {study.best_value:.4f}")
             print(f"   Лучшие параметры: {study.best_params}")
 
         return self.best_params
@@ -161,7 +161,7 @@ class HyperparametrTuner:
         }
         
         joblib.dump(results, filepath)
-        print(f"✅ Результаты тюнинга сохранены: {filepath}")
+        print(f"Результаты тюнинга сохранены: {filepath}")
         return filepath
     
     def load_tuning_results(self, filepath):
@@ -171,5 +171,5 @@ class HyperparametrTuner:
         results = joblib.load(filepath)
         self.best_params = results['best_params']
         self.results = results['study_results']
-        print(f"✅ Результаты тюнинга загружены из: {filepath}")
+        print(f"Результаты тюнинга загружены из: {filepath}")
         return results

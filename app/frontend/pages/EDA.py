@@ -20,7 +20,7 @@ load_css()
 
 st.markdown("""
 <div class="eda-container">
-    <h1 class="eda-title">📊 Разведочный анализ данных (EDA)</h1>
+    <h1 class="eda-title">Разведочный анализ данных (EDA)</h1>
     <div class="eda-card">
         <p style="text-align: center; font-size: 1.2rem; margin: 0;">
             Анализ распределения признаков, выявление закономерностей и формулировка гипотез о факторах оттока клиентов банка.
@@ -45,7 +45,7 @@ if df.empty:
 
 st.sidebar.markdown("""
 <div class="sidebar-nav">
-    <h3 style="margin-bottom: 1rem; border-bottom: 1px solid #2a2f38; padding-bottom: 0.5rem;">🔍 Навигация по EDA</h3>
+    <h3 style="margin-bottom: 1rem; border-bottom: 1px solid #2a2f38; padding-bottom: 0.5rem;">Навигация по EDA</h3>
 """, unsafe_allow_html=True)
 
 section = st.sidebar.radio(
@@ -58,7 +58,7 @@ section = st.sidebar.radio(
 st.sidebar.markdown("</div>", unsafe_allow_html=True)
 
 if section == "Обзор данных":
-    st.markdown('<h2 class="eda-subtitle">📈 Обзор данных</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="eda-subtitle">Обзор данных</h2>', unsafe_allow_html=True)
     
     st.markdown("""
     <div class="eda-metrics">
@@ -100,7 +100,7 @@ if section == "Обзор данных":
     st.dataframe(df[numeric_cols].describe(), use_container_width=True)
 
 elif section == "Анализ оттока":
-    st.markdown('<h2 class="eda-subtitle">🎯 Анализ целевой переменной</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="eda-subtitle">Анализ целевой переменной</h2>', unsafe_allow_html=True)
     
     col1, col2 = st.columns(2)
     
@@ -122,7 +122,7 @@ elif section == "Анализ оттока":
         
         st.markdown("""
         <div class="eda-card churn-analysis-card">
-            <h3 style="margin-bottom: 1rem;">📈 Статистика оттока</h3>
+            <h3 style="margin-bottom: 1rem;">Статистика оттока</h3>
             <div class="eda-metrics">
                 <div class="eda-metric">
                     <div class="eda-metric-value">{:,}</div>
@@ -146,13 +146,13 @@ elif section == "Анализ оттока":
         
         st.markdown("""
         <div class="insight-card insight-strong">
-            <strong>🔍 Наблюдение:</strong> Наблюдается значительный дисбаланс классов (80:20). 
+            <strong>Наблюдение:</strong> Наблюдается значительный дисбаланс классов (80:20). 
             Это потребует специальных методов обработки на этапе моделирования.
         </div>
         """, unsafe_allow_html=True)
 
 elif section == "Категориальные признаки":
-    st.markdown('<h2 class="eda-subtitle">📊 Анализ категориальных признаков</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="eda-subtitle">Анализ категориальных признаков</h2>', unsafe_allow_html=True)
     
     categorical_features = ['Geography', 'Gender', 'NumOfProducts', 'HasCrCard', 'IsActiveMember']
     
@@ -168,7 +168,7 @@ elif section == "Категориальные признаки":
     )
     st.plotly_chart(fig, use_container_width=True)
     
-    st.subheader(f"📊 Статистика оттока по {selected_feature}")
+    st.subheader(f"Статистика оттока по {selected_feature}")
     
     churn_by_feature = df.groupby(selected_feature)['Exited'].agg(['count', 'mean']).round(3)
     churn_by_feature['count'] = churn_by_feature['count'].astype(int)
@@ -177,7 +177,7 @@ elif section == "Категориальные признаки":
     
     st.dataframe(churn_by_feature, use_container_width=True)
     
-    st.subheader("🔍 Ключевые наблюдения")
+    st.subheader("Ключевые наблюдения")
     
     insights = {
         'Geography': "Клиенты из Германии уходят чаще (32%), чем из Франции (16%) и Испании (17%)",
@@ -190,7 +190,7 @@ elif section == "Категориальные признаки":
     st.info(insights[selected_feature])
 
 elif section == "Числовые признаки":
-    st.markdown('<h2 class="eda-subtitle">🔢 Анализ числовых признаков</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="eda-subtitle">Анализ числовых признаков</h2>', unsafe_allow_html=True)
     
     numeric_features = ['CreditScore', 'Age', 'Balance', 'EstimatedSalary']
     selected_numeric = st.selectbox("Выберите числовой признак:", numeric_features)
@@ -222,7 +222,7 @@ elif section == "Числовые признаки":
         )
         st.plotly_chart(fig, use_container_width=True)
     
-    st.markdown('<div class="eda-card numerical-analysis-card"><h4>📊Статистический анализ</h4>', unsafe_allow_html=True)
+    st.markdown('<div class="eda-card numerical-analysis-card"><h4>Статистический анализ</h4>', unsafe_allow_html=True)
     
     group_0 = df[df['Exited'] == 0][selected_numeric]
     group_1 = df[df['Exited'] == 1][selected_numeric]
@@ -245,13 +245,13 @@ elif section == "Числовые признаки":
     
     st.markdown("""
     <div class="insight-card">
-        <strong>📈 Интерпретация:</strong> {}
+        <strong>Интерпретация:</strong> {}
     </div>
     """.format(effect_strength), unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
 elif section == "Корреляционный анализ":
-    st.markdown('<h2 class="eda-subtitle">📈 Корреляционный анализ</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="eda-subtitle">Корреляционный анализ</h2>', unsafe_allow_html=True)
     
     st.markdown('<div class="correlation-matrix"><h4>Матрица корреляций (Spearman)</h4>', unsafe_allow_html=True)
     correlation_features = ['CreditScore', 'Age', 'Balance', 'NumOfProducts', 'Tenure', 'EstimatedSalary', 'Exited']
@@ -307,7 +307,7 @@ elif section == "Корреляционный анализ":
     st.markdown('</div>', unsafe_allow_html=True)
 
 elif section == "Выводы":
-    st.markdown('<h2 class="eda-subtitle">📋 Ключевые выводы EDA</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="eda-subtitle">Ключевые выводы EDA</h2>', unsafe_allow_html=True)
     
     st.markdown("""
     <div class="eda-card conclusions-card">
@@ -320,7 +320,7 @@ elif section == "Выводы":
     with col1:
         st.markdown("""
         <div class="conclusion-card conclusion-high-risk">
-            <h4>🚨 Факторы высокого риска</h4>
+            <h4>Факторы высокого риска</h4>
             <ul style=>
                 <li><strong>1 продукт банка</strong> → 51% риск vs 5% при 3+ продуктах</li>
                 <li><strong>Неактивность</strong> → 45% увеличение риска оттока</li>
@@ -333,7 +333,7 @@ elif section == "Выводы":
 
         st.markdown("""
         <div class="conclusion-card conclusion-statistical" style="margin-top: 15px">
-            <h4>📊 Статистические выводы</h4>
+            <h4>Статистические выводы</h4>
             <ul style=>
             <li><strong>Сильное влияние:</strong> Возраст, количество продуктов</li>
             <li><strong>Умеренное влияние:</strong> Баланс, география, активность</li>  
@@ -345,7 +345,7 @@ elif section == "Выводы":
     with col2:
         st.markdown("""
         <div class="conclusion-card conclusion-low-risk">
-            <h4>🟢 Факторы низкого риска</h4>
+            <h4>Факторы низкого риска</h4>
             <ul style=>
                 <li><strong>3+ продукта</strong> → всего 5% риска оттока</li>
                 <li><strong>Активность</strong> → 14% оттока vs 26% у неактивных</li>
@@ -357,7 +357,7 @@ elif section == "Выводы":
         """, unsafe_allow_html=True)
         st.markdown("""
         <div class="conclusion-card conclusion-business" style="margin-top: 15px">
-            <h4>🎯 Рекомендации для бизнеса</h4>
+            <h4>Рекомендации для бизнеса</h4>
             <ul style=>
             <li><strong>Приоритетные меры:</strong> Кросс-продажи для клиентов с 1 продуктом</li>
             <li><strong>Сегментация:</strong> Особое внимание клиентам 45+ из Германии</li>
@@ -370,7 +370,7 @@ st.markdown("---")
 st.markdown("""
 <div class="footer">
     <p style="text-align: center; color: #6c727d; margin: 0;">
-        📊 EDA анализ выполнен с использованием Streamlit, Plotly и статистических методов
+        EDA анализ выполнен с использованием Streamlit, Plotly и статистических методов
     </p>
 </div>
 """, unsafe_allow_html=True)

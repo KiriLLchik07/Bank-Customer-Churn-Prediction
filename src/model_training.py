@@ -86,7 +86,7 @@ class TrainModels:
         for name, model in tuned_models_dict.items():
             model.fit(self.X_train, self.y_train)
             self.models[name] = model
-        print(f"✅ Добавлено {len(tuned_models_dict)} настроенных моделей")
+        print(f"Добавлено {len(tuned_models_dict)} настроенных моделей")
         return self.models
     
     def evaluate_models(self):
@@ -214,7 +214,7 @@ class TrainModels:
                 best_score = score
                 best_threshold = threshold
         
-        print(f"🎯 Оптимальный порог для {model_name}: {best_threshold:.3f}")
+        print(f"Оптимальный порог для {model_name}: {best_threshold:.3f}")
         print(f"   {metric.capitalize()} с оптимальным порогом: {best_score:.4f}")
         
         return best_threshold, best_score
@@ -241,7 +241,7 @@ class TrainModels:
             'roc_auc': roc_auc_score(self.y_test, y_pred_proba)
         }
         
-        print(f"📊 Метрики с порогом {threshold:.3f}:")
+        print(f"Метрики с порогом {threshold:.3f}:")
         for metric, value in optimal_metrics.items():
             print(f"   {metric}: {value:.4f}")
         
@@ -288,7 +288,7 @@ class TrainModels:
             model_name = os.path.basename(model_name_or_path).split('_')[0]
 
         self.models[model_name] = model
-        print(f"✅ Модель {model_name} загружена в trainer")
+        print(f"Модель {model_name} загружена в trainer")
         return model
 
     def create_final_report(self, model_name, threshold=0.5):
@@ -338,7 +338,7 @@ class TrainModels:
         plt.show()
         
         tn, fp, fn, tp = confusion_matrix(self.y_test, y_pred).ravel()
-        print("📊 Бизнес-интерпретация:")
+        print("Бизнес-интерпретация:")
         print(f"   Правильно предсказали лояльных: {tn} клиентов")
         print(f"   Ложные срабатывания (напрасно беспокоили): {fp} клиентов") 
         print(f"   Пропущенные уходящие: {fn} клиентов")
@@ -371,8 +371,8 @@ class TrainModels:
             plt.tight_layout()
             plt.show()
             
-            print("🎯 Топ-10 самых важных признаков:")
+            print("Топ-10 самых важных признаков:")
             for i in range(min(10, len(indices))):
                 print(f"   {i+1}. {feature_names[indices[i]]}: {importances[indices[i]]:.4f}")
         else:
-            print(f"❌ Модель {model_name} не поддерживает feature importance")
+            print(f"Модель {model_name} не поддерживает feature importance")
