@@ -1,17 +1,4 @@
-# 🏦 Bank Customer Churn Prediction
-
-[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
-[![Poetry](https://img.shields.io/badge/poetry--dependency%20management-orange.svg)](https://python-poetry.org/)
-[![Scikit-Learn](https://img.shields.io/badge/scikit--learn-1.7.2-green.svg)](https://scikit-learn.org/)
-[![CatBoost](https://img.shields.io/badge/catboost-1.2.8-yellow.svg)](https://catboost.ai/)
-[![XGBoost](https://img.shields.io/badge/xgboost-3.0.5-red.svg)](https://xgboost.ai/)
-[![LightGBM](https://img.shields.io/badge/lightgbm-4.6.0-lightblue.svg)](https://lightgbm.readthedocs.io/)
-[![Imbalanced-learn](https://img.shields.io/badge/imbalanced--learn-0.14.0-yellow.svg)](https://imbalanced-learn.org/stable/)
-[![Optuna](https://img.shields.io/badge/optuna-4.5.0-purple.svg)](https://optuna.org/)
-[![SHAP](https://img.shields.io/badge/shap-0.48.0-success.svg)](https://shap.readthedocs.io/)
-[![Pandas](https://img.shields.io/badge/pandas-2.0.0-150458.svg)](https://pandas.pydata.org/)
-[![Matplotlib](https://img.shields.io/badge/matplotlib-3.7.0-blueviolet.svg)](https://matplotlib.org/)
-[![Seaborn](https://img.shields.io/badge/seaborn-0.13.2-blueviolet.svg)](https://seaborn.pydata.org/)
+# Предсказание оттока клиентов в банковской сфере
 
 ML-проект по прогнозированию оттока клиентов банка с помощью машинного обучения. Система идентифицирует клиентов с высоким риском ухода и предоставляет персонализированные рекомендации по их удержанию.
 
@@ -219,7 +206,3 @@ poetry run streamlit run app.py
 ## Автор
 
 - Кирилл Есаков - [KiriLLchik07](https://github.com/KiriLLchik07) | [Email](kirill3456777@mail.ru)
-
----
-
-**⭐ Если этот проект был полезен, поставьте звезду на GitHub!**
