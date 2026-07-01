@@ -5,7 +5,6 @@ import plotly.express as px
 
 st.set_page_config(
     page_title="EDA - Bank Churn Analysis", 
-    page_icon="📊",
     layout="wide"
 )
 

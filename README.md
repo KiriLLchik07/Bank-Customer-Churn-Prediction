@@ -1,4 +1,4 @@
-# 🏦 Bank Customer Churn Prediction
+# Bank Customer Churn Prediction
 
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![Poetry](https://img.shields.io/badge/poetry--dependency%20management-orange.svg)](https://python-poetry.org/)
@@ -70,20 +70,20 @@ poetry shell
 
 ```
 Bank-Customer-Churn-Prediction/
-├──     config/               # Конфигурационные файлы
+├── config/                  # Конфигурационные файлы
 │   ├── risk_factors.yaml    # Факторы риска
 │   └── recommendations.yaml # Бизнес-рекомендации
-├──    data/                 # Исходные и обработанные данные
-├──    models/               # Обученные модели
-├──    notebooks/            # Jupyter notebooks для анализа
+├── data/                    # Исходные и обработанные данные
+├── models/                  # Обученные модели
+├── notebooks/               # Jupyter notebooks для анализа
 │   ├── 01_primary_data_review.ipynb
 │   ├── 02_eda_analysis.ipynb
 │   ├── 03_preprocessing.ipynb
 │   ├── 04_data_preparation.ipynb
 │   ├── 05_modeling_and_experiments.ipynb
 │   └── 06_model_interpretation.ipynb
-├──    reports/              # Отчеты и визуализации
-├──    src/                  # Исходный код
+├── reports/                 # Отчеты и визуализации
+├── src/                     # Исходный код
 │   ├── customer_generator.py     # Генератор тестовых клиентов
 │   ├── data_preparation.py     # Подготовка данных к моделированию
 │   ├── hyperparametr_config.py     # Сетка гиперпаараметров для различных моделей
@@ -92,7 +92,7 @@ Bank-Customer-Churn-Prediction/
 │   ├── model_training.py    # Обучение и оценка моделей
 │   ├── predict_churn.py     # Основной класс для прогнозирования
 │   └── preprocessing.py     # Предобработка данных
-├──     app/                  # FastAPI и Streamlit приложения
+├── app/                     # FastAPI и Streamlit приложения
 │   ├── api/                 # FastAPI бэкенд
 │   │   ├── main.py          # Основное приложение FastAPI
 │   │   └── schemas.py       # Pydantic схемы данных
@@ -100,8 +100,8 @@ Bank-Customer-Churn-Prediction/
 │       ├── app.py           # Главное приложение Streamlit
 │       ├── assets/          # Статические файлы
 │       └── pages/           # Страницы приложения
-├──     README.md
-└──     pyproject.toml        # Зависимости проекта
+├── README.md
+└── pyproject.toml           # Зависимости проекта
 ```
 
 ## Бизнес-рекомендации
@@ -222,4 +222,4 @@ poetry run streamlit run app.py
 
 ---
 
-**⭐ Если этот проект был полезен, поставьте звезду на GitHub!**
+**Если этот проект был полезен, поставьте звезду на GitHub.**

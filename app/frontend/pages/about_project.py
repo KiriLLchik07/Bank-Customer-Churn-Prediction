@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.set_page_config(layout="wide", page_icon='🏡')
+st.set_page_config(layout="wide")
 
 def load_css():
     with open("assets/styles/custom.css") as f:
@@ -10,7 +10,7 @@ load_css()
 
 st.markdown("""
 <div class="title">
-    <h1>🏦 Bank Customer Churn Prediction</h1>
+    <h1>Bank Customer Churn Prediction</h1>
 </div>
 
 <div class="about_project">
@@ -132,13 +132,11 @@ st.markdown("""
         <h3>Портреты клиентов:</h3>
         <div class="customer-profiles">
             <div class="profile-high-risk">
-                <span class="profile-icon">🚨</span>
                 <div class="profile-content">
                     <strong>Высокий риск:</strong> 1 продукт + неактивен + возраст 45+ + мужчина
                 </div>
             </div>
             <div class="profile-low-risk">
-                <span class="profile-icon">🟢</span>
                 <div class="profile-content">
                     <strong>Низкий риск:</strong> 3+ продукта + активен + молодой возраст + женщина
                 </div>
@@ -201,22 +199,22 @@ st.markdown("""
                 </thead>
                 <tbody>
                     <tr class="risk-critical">
-                        <td>🚨 Критический</td>
+                        <td>Критический</td>
                         <td>>60%</td>
                         <td>Немедленное вмешательство, персональный менеджер</td>
                     </tr>
                     <tr class="risk-high">
-                        <td>🟡 Высокий</td>
+                        <td>Высокий</td>
                         <td>40-60%</td>
                         <td>Приоритетное удержание, кросс-продажи</td>
                     </tr>
                     <tr class="risk-medium">
-                        <td>🟠 Средний</td>
+                        <td>Средний</td>
                         <td>20-40%</td>
                         <td>Активный мониторинг, email-кампании</td>
                     </tr>
                     <tr class="risk-low">
-                        <td>🟢 Низкий</td>
+                        <td>Низкий</td>
                         <td><20%</td>
                         <td>Стандартное обслуживание</td>
                     </tr>
@@ -263,7 +261,7 @@ st.markdown("""
     <div class="github-star">
         <div class="card">
             <p style="text-align: center; margin: 0;">
-                <strong>⭐ Если этот проект был полезен, поставьте звезду на GitHub!</strong>
+                <strong>Если этот проект был полезен, поставьте звезду на GitHub.</strong>
             </p>
         </div>
     </div>

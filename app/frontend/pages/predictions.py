@@ -3,7 +3,6 @@ import requests
 
 st.set_page_config(
     page_title="Предсказание оттока - Bank Churn",
-    page_icon="🔮",
     layout="wide"
 )
 
@@ -174,16 +173,16 @@ if predict_btn:
             prob = result['churn_probability']
             if prob > 0.6:
                 risk_class = "risk-critical"
-                risk_text = "🚨 Критический риск - Требуется немедленное вмешательство"
+                risk_text = "Критический риск - Требуется немедленное вмешательство"
             elif prob > 0.4:
                 risk_class = "risk-high"
-                risk_text = "🟡 Высокий риск - Приоритетное удержание"
+                risk_text = "Высокий риск - Приоритетное удержание"
             elif prob > 0.2:
                 risk_class = "risk-medium"
-                risk_text = "🟠 Средний риск - Активный мониторинг"
+                risk_text = "Средний риск - Активный мониторинг"
             else:
                 risk_class = "risk-low"
-                risk_text = "🟢 Низкий риск - Стандартное обслуживание"
+                risk_text = "Низкий риск - Стандартное обслуживание"
             
             st.markdown(f'<div class="{risk_class}">{risk_text}</div>', unsafe_allow_html=True)
             
@@ -245,7 +244,7 @@ else:
     else:
         st.markdown("""
         <div class="customer-profile">
-            <h3 style="color: #b8860b; text-align: center;">👈 Введите данные клиента в боковой панели и нажмите "Предсказать риск оттока"</h3>
+            <h3 style="color: #b8860b; text-align: center;">Введите данные клиента в боковой панели и нажмите "Предсказать риск оттока"</h3>
         </div>
         """, unsafe_allow_html=True)
     
@@ -290,22 +289,22 @@ else:
             <p>Предсказание выполняется с помощью <strong>CatBoost модели</strong> через <strong>FastAPI бэкенд</strong>:</p>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
                 <div style="text-align: center;">
-                    <div style="font-size: 2rem;">🚀</div>
+                    <div style="font-size: 1.4rem; font-weight: 700; color: #b8860b;">API</div>
                     <strong>FastAPI бэкенд</strong>
                     <p>REST API на Python</p>
                 </div>
                 <div style="text-align: center;">
-                    <div style="font-size: 2rem;">🤖</div>
+                    <div style="font-size: 1.4rem; font-weight: 700; color: #b8860b;">ML</div>
                     <strong>CatBoost модель</strong>
                     <p>Градиентный бустинг</p>
                 </div>
                 <div style="text-align: center;">
-                    <div style="font-size: 2rem;">📊</div>
+                    <div style="font-size: 1.4rem; font-weight: 700; color: #b8860b;">AUC</div>
                     <strong>ROC-AUC: 0.872</strong>
                     <p>Высокая точность</p>
                 </div>
                 <div style="text-align: center;">
-                    <div style="font-size: 2rem;">⚡</div>
+                    <div style="font-size: 1.4rem; font-weight: 700; color: #b8860b;">RT</div>
                     <strong>Real-time</strong>
                     <p>Мгновенные предсказания</p>
                 </div>

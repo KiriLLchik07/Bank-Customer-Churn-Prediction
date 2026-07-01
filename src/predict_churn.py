@@ -108,19 +108,19 @@ class CustomerChurnPredictor:
         probability = self.model.predict_proba(test_data)[0, 0]
         
         if probability > 0.6:
-            risk_level = "🚨 Критический риск"
+            risk_level = "Критический риск"
             action = "Немедленное вмешательство"
             color = "red"
         elif probability > 0.4:
-            risk_level = "🟡 Высокий риск"
+            risk_level = "Высокий риск"
             action = "Приоритетное удержание" 
             color = "orange"
         elif probability > 0.2:
-            risk_level = "🟠 Средний риск"
+            risk_level = "Средний риск"
             action = "Активный мониторинг"
             color = "yellow"
         else:
-            risk_level = "🟢 Низкий риск"
+            risk_level = "Низкий риск"
             action = "Стандартное обслуживание"
             color = "green"
         

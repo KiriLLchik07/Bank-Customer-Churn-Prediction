@@ -4,7 +4,6 @@ import plotly.express as px
 
 st.set_page_config(
     page_title="Моделирование - Bank Churn", 
-    page_icon="🤖",
     layout="wide"
 )
 
@@ -243,22 +242,22 @@ elif section == "Оптимизация гиперпараметров":
         <h3 style="color: #b8860b;"> Процесс оптимизации гиперпараметров</h3>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; color: #a0a5b0;">
             <div style="text-align: center;">
-                <div style="font-size: 2rem;">1️⃣</div>
+                <div style="font-size: 2rem;">1</div>
                 <strong>Инициализация</strong>
                 <p>Определение пространства параметров</p>
             </div>
             <div style="text-align: center;">
-                <div style="font-size: 2rem;">2️⃣</div>
+                <div style="font-size: 2rem;">2</div>
                 <strong>Сэмплирование</strong>
                 <p>TPE выбирает перспективные параметры</p>
             </div>
             <div style="text-align: center;">
-                <div style="font-size: 2rem;">3️⃣</div>
+                <div style="font-size: 2rem;">3</div>
                 <strong>Оценка</strong>
                 <p>Обучение и валидация модели</p>
             </div>
             <div style="text-align: center;">
-                <div style="font-size: 2rem;">4️⃣</div>
+                <div style="font-size: 2rem;">4</div>
                 <strong>Обновление</strong>
                 <p>Алгоритм учится на результатах</p>
             </div>
