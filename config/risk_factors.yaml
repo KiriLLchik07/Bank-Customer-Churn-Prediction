@@ -2,7 +2,7 @@ risk_factors:
   NumOfProducts:
     conditions:
       - value: 1
-        message: "Только 1 продукт банка - ВЫСОКИЙ РИСК"
+        message: "Только 1 продукт банка - высокий риск"
         type: "high_risk"
       - value: ">=3"
         message: "3+ продукта банка - низкий риск"
@@ -11,7 +11,7 @@ risk_factors:
   IsActiveMember:
     conditions:
       - value: 0
-        message: "Неактивный клиент - ВЫСОКИЙ РИСК"
+        message: "Неактивный клиент - высокий риск"
         type: "high_risk"
       - value: 1
         message: "Активный клиент - низкий риск"

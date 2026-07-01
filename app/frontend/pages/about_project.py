@@ -125,7 +125,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Портреты клиентов - ОТДЕЛЬНЫМ БЛОКОМ
+# Портреты клиентов - отдельный блок
 st.markdown("""
 <div class="section">
     <div class="card">
@@ -225,7 +225,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Конкретные меры - ОТДЕЛЬНЫМ БЛОКОМ
+# Конкретные меры - отдельный блок
 st.markdown("""
 <div class="section">
     <div class="card">
